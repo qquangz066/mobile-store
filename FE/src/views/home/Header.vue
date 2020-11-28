@@ -1,0 +1,201 @@
+<template>
+  <!-- top-header -->
+  <div class="agile-main-top">
+    <div class="container-fluid">
+      <div class="row main-top-w3l py-2">
+        <div class="col-lg-12 header-right mt-lg-0 mt-2 text-right">
+          <!-- header lists -->
+          <ul>
+            <li class="text-center border-right text-white">
+              <a href="#" data-toggle="modal" data-target="#loginModal" class="text-white">
+                <i class="fas fa-sign-in-alt mr-2"></i>Đăng nhập </a>
+            </li>
+            <li class="text-center text-white">
+              <a href="#" data-toggle="modal" data-target="#registerModal" class="text-white">
+                <i class="fas fa-sign-out-alt mr-2"></i>Đăng ký </a>
+            </li>
+          </ul>
+          <!-- //header lists -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modals -->
+  <!-- log in -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center">Đăng nhập</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="#" method="post">
+            <div class="form-group">
+              <label class="col-form-label">Email</label>
+              <input type="text" class="form-control" placeholder=" " name="Name" required="">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Mật khẩu</label>
+              <input type="password" class="form-control" placeholder=" " name="Password" required="">
+            </div>
+            <div class="right-w3l">
+              <input type="submit" class="form-control" value="Đăng nhập">
+            </div>
+            <p class="text-center dont-do mt-3">
+              <a href="#" data-toggle="modal" data-target="#registerModal">
+                Đăng ký</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- register -->
+  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Đăng ký</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="#" method="post">
+            <div class="form-group">
+              <label class="col-form-label">Tên</label>
+              <input type="text" class="form-control" placeholder=" " name="Name" required="">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Email</label>
+              <input type="email" class="form-control" placeholder=" " name="Email" required="">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Mật khẩu</label>
+              <input type="password" class="form-control" placeholder=" " name="Password" id="password1"
+                     required="">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Nhập lại mật khẩu</label>
+              <input type="password" class="form-control" placeholder=" " name="Confirm Password"
+                     id="password2" required="">
+            </div>
+            <div class="right-w3l">
+              <input type="submit" class="form-control" value="Đăng ký">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- //modal -->
+  <!-- //top-header -->
+
+  <!-- header-bottom-->
+  <div class="header-bot">
+    <div class="container">
+      <div class="row header-bot_inner_wthreeinfo_header_mid">
+        <!-- logo -->
+        <div class="col-md-3 logo_agile">
+          <h1 class="text-center">
+            <a href="index.html" class="font-weight-bold font-italic">
+              Mobile Store
+            </a>
+          </h1>
+        </div>
+        <!-- //logo -->
+        <!-- header-bot -->
+        <div class="col-md-9 header mt-4 mb-md-0 mb-4">
+          <div class="row">
+            <!-- search -->
+            <div class="col-10 agileits_search">
+              <form class="form-inline" action="#" method="post">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                       required>
+                <button class="btn my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+            <!-- //search -->
+            <!-- cart details -->
+            <div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
+              <div class="wthreecartaits wthreecartaits2 cart cart box_1">
+                <button class="btn w3view-cart">
+                  <i class="fas fa-cart-arrow-down"></i>
+                </button>
+              </div>
+            </div>
+            <!-- //cart details -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- shop locator (popup) -->
+  <!-- //header-bottom -->
+  <!-- navigation -->
+  <div class="navbar-inner">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav text-center mr-xl-5">
+            <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+              <a class="nav-link" href="index.html">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
+                Categories
+              </a>
+              <div class="dropdown-menu">
+                <div class="agile_inner_drop_nav_info p-4">
+                  <div class="row">
+                    <div class="col-sm-12 multi-gd-img">
+                      <ul class="multi-column-dropdown">
+                        <li>
+                          <a href="product.html">All Mobile Phones</a>
+                        </li>
+                        <li>
+                          <a href="product.html">All Mobile Accessories</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <!-- //navigation -->
+
+  <!-- banner-2 -->
+  <div class="page-head_agile_info_w3l">
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Header'
+};
+</script>
+
+<style scoped>
+
+</style>
