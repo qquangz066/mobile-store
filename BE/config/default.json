@@ -8,7 +8,7 @@
   },
   "authentication": {
     "entity": "user",
-    "service": "users",
+    "service": "admin/users",
     "secret": "zt/Ik3LFQqxx7kcu/r+ODQMiAz0=",
     "authStrategies": [
       "jwt",

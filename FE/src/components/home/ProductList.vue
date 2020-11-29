@@ -59,7 +59,7 @@ export default {
 
   methods: {
     async getProducts() {
-      this.page = (await this.$http.get('http://localhost:3030/products')).data;
+      this.page = await this.$services.product.list();
     }
   },
 

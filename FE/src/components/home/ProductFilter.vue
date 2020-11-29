@@ -3,56 +3,13 @@
     <div class="side-bar p-sm-4 p-3">
       <div class="search-hotel border-bottom py-2">
         <h3 class="agileits-sear-head mb-3">Brand</h3>
-        <form action="#" method="post">
-          <input type="search" placeholder="Search Brand..." name="search" required="">
-          <input type="submit" value=" ">
-        </form>
         <div class="left-side py-2">
-          <ul>
+          <ul v-for="(brand,index) in brands" :key="index">
             <li>
               <input type="checkbox" class="checked">
-              <span class="span">Samsung</span>
+              <span class="span">{{ brand.text }}</span>
             </li>
-            <li>
-              <input type="checkbox" class="checked">
-              <span class="span">Red Mi</span>
-            </li>
-            <li>
-              <input type="checkbox" class="checked">
-              <span class="span">Apple</span>
-            </li>
-            <li>
-              <input type="checkbox" class="checked">
-              <span class="span">Nexus</span>
-            </li>
-            <li>
-              <input type="checkbox" class="checked">
-              <span class="span">Motorola</span>
-            </li>
-            <li>
-              <input type="checkbox" class="checked">
-              <span class="span">Micromax</span>
-            </li>
-            <li>
-              <input type="checkbox" class="checked">
-              <span class="span">Lenovo</span>
-            </li>
-            <li>
-              <input type="checkbox" class="checked">
-              <span class="span">Oppo</span>
-            </li>
-            <li>
-              <input type="checkbox" class="checked">
-              <span class="span">Sony</span>
-            </li>
-            <li>
-              <input type="checkbox" class="checked">
-              <span class="span">LG</span>
-            </li>
-            <li>
-              <input type="checkbox" class="checked">
-              <span class="span">One Plus</span>
-            </li>
+
           </ul>
         </div>
       </div>
@@ -128,7 +85,28 @@
 
 <script>
 export default {
-  name: 'ProductFilter'
+  name: 'ProductFilter',
+
+  data() {
+    return {
+      page: {}
+    };
+  },
+  computed: {
+    brands() {
+      return this.page.data;
+    }
+  },
+
+  methods: {
+    async getBrands() {
+      this.page = await this.$services.brand.list();
+    }
+  },
+
+  created() {
+    this.getBrands();
+  }
 };
 </script>
 

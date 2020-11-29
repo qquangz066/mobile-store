@@ -11,7 +11,7 @@ function base64Encode(file) {
 exports.initDB = async function (app) {
   try {
 
-    const user = await app.service('users').find({
+    const user = await app.service('admin/users').find({
       query: {
         email: 'admin@admin.com'
       }
@@ -19,7 +19,7 @@ exports.initDB = async function (app) {
 
     if (user.total === 0) {
       // init users
-      app.service('users').create(
+      app.service('admin/users').create(
         {
           name: 'admin',
           email: 'admin@admin.com',
@@ -29,14 +29,14 @@ exports.initDB = async function (app) {
       );
 
       // init categories
-      var phone_category = await app.service('categories').create(
+      var phone_category = await app.service('admin/categories').create(
         {
           name: 'phone',
           text: 'Điện thoại'
         }
       );
 
-      var accessories_category = await app.service('categories').create(
+      var accessories_category = await app.service('admin/categories').create(
         {
           name: 'accessories',
           text: 'Phụ kiện'
@@ -44,25 +44,25 @@ exports.initDB = async function (app) {
       );
 
       // init brands
-      var apple_brand = await app.service('brands').create(
+      var apple_brand = await app.service('admin/brands').create(
         {
           name: 'apple',
           text: 'Apple'
         }
       );
-      var samsung_brand = await app.service('brands').create(
+      var samsung_brand = await app.service('admin/brands').create(
         {
           name: 'samsung',
           text: 'Samsung'
         }
       );
-      var oppo_brand = await app.service('brands').create(
+      var oppo_brand = await app.service('admin/brands').create(
         {
           name: 'oppo',
           text: 'Oppo'
         }
       );
-      var xiaomi_brand = await app.service('brands').create(
+      var xiaomi_brand = await app.service('admin/brands').create(
         {
           name: 'xiaomi',
           text: 'Xiaomi'
@@ -70,7 +70,7 @@ exports.initDB = async function (app) {
       );
 
       // init brands
-      app.service('products').create(
+      app.service('admin/products').create(
         {
           name: 'iPhone 11 128GB',
           category_id: phone_category._id,
@@ -128,7 +128,7 @@ exports.initDB = async function (app) {
         }
       );
 
-      app.service('products').create(
+      app.service('admin/products').create(
         {
           name: 'Samsung Galaxy Note 20 Ultra',
           category_id: phone_category._id,
@@ -186,7 +186,7 @@ exports.initDB = async function (app) {
         }
       );
 
-      app.service('products').create(
+      app.service('admin/products').create(
         {
           name: 'Samsung Galaxy S20 FE',
           category_id: phone_category._id,
@@ -244,7 +244,7 @@ exports.initDB = async function (app) {
         }
       );
 
-      app.service('products').create(
+      app.service('admin/products').create(
         {
           name: 'Samsung Galaxy A11',
           category_id: phone_category._id,
