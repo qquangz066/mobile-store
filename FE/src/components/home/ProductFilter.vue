@@ -4,12 +4,11 @@
       <div class="search-hotel border-bottom py-2">
         <h3 class="agileits-sear-head mb-3">Brand</h3>
         <div class="left-side py-2">
-          <ul v-for="(brand,index) in brands" :key="index">
+          <ul v-for="(brand, index) in brands" :key="index">
             <li>
-              <input type="checkbox" class="checked">
+              <input type="checkbox" class="checked" />
               <span class="span">{{ brand.text }}</span>
             </li>
-
           </ul>
         </div>
       </div>
@@ -18,35 +17,35 @@
         <h3 class="agileits-sear-head mb-3">Ram</h3>
         <ul>
           <li>
-            <input type="checkbox" class="checked">
+            <input type="checkbox" class="checked" />
             <span class="span">Less than 512 MB</span>
           </li>
           <li>
-            <input type="checkbox" class="checked">
+            <input type="checkbox" class="checked" />
             <span class="span">512 MB - 1 GB</span>
           </li>
           <li>
-            <input type="checkbox" class="checked">
+            <input type="checkbox" class="checked" />
             <span class="span">1 GB</span>
           </li>
           <li>
-            <input type="checkbox" class="checked">
+            <input type="checkbox" class="checked" />
             <span class="span">2 GB</span>
           </li>
           <li>
-            <input type="checkbox" class="checked">
+            <input type="checkbox" class="checked" />
             <span class="span">3 GB</span>
           </li>
           <li>
-            <input type="checkbox" class="checked">
+            <input type="checkbox" class="checked" />
             <span class="span">5 GB</span>
           </li>
           <li>
-            <input type="checkbox" class="checked">
+            <input type="checkbox" class="checked" />
             <span class="span">6 GB</span>
           </li>
           <li>
-            <input type="checkbox" class="checked">
+            <input type="checkbox" class="checked" />
             <span class="span">6 GB & Above</span>
           </li>
         </ul>
@@ -85,31 +84,30 @@
 
 <script>
 export default {
-  name: 'ProductFilter',
+  name: "ProductFilter",
 
   data() {
     return {
-      page: {}
+      page: {},
     };
   },
   computed: {
     brands() {
       return this.page.data;
-    }
+    },
   },
 
   methods: {
     async getBrands() {
       this.page = await this.$services.brand.list();
-    }
+    },
   },
 
   created() {
     this.getBrands();
-  }
+  },
 };
 </script>
 
 <style scoped>
-
 </style>

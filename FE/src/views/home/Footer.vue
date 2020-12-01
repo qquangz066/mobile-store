@@ -100,12 +100,8 @@
               <li class="mb-3">
                 <i class="fas fa-map-marker"></i> 123 Sebastian, USA.
               </li>
-              <li class="mb-3">
-                <i class="fas fa-mobile"></i> 333 222 3333
-              </li>
-              <li class="mb-3">
-                <i class="fas fa-phone"></i> +222 11 4444
-              </li>
+              <li class="mb-3"><i class="fas fa-mobile"></i> 333 222 3333</li>
+              <li class="mb-3"><i class="fas fa-phone"></i> +222 11 4444</li>
               <li class="mb-3">
                 <i class="fas fa-envelope-open"></i>
                 <a href="mailto:example@mail.com"> mail 1@example.com</a>
@@ -122,13 +118,19 @@
             <p class="mb-3">Free Delivery on your first order!</p>
             <form action="#" method="post">
               <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email" name="email" required="">
-                <input type="submit" value="Go">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Email"
+                  name="email"
+                  required=""
+                />
+                <input type="submit" value="Go" />
               </div>
             </form>
             <!-- //newsletter -->
             <!-- social icons -->
-            <div class="footer-grids  w3l-socialmk mt-3">
+            <div class="footer-grids w3l-socialmk mt-3">
               <h3 class="text-white font-weight-bold mb-3">Follow Us on</h3>
               <div class="social">
                 <ul>
@@ -157,13 +159,13 @@
       </div>
     </div>
     <!-- //footer third section -->
-
   </footer>
   <!-- //footer -->
   <!-- copyright -->
   <div class="copy-right py-3">
     <div class="container">
-      <p class="text-center text-white">© 2018 Mobile Store. All rights reserved | Design by
+      <p class="text-center text-white">
+        © 2018 Mobile Store. All rights reserved | Design by
         <a href="http://w3layouts.com"> W3layouts.</a>
       </p>
     </div>
@@ -173,10 +175,9 @@
 
 <script>
 export default {
-  name: 'Footer'
+  name: "Footer",
 };
 </script>
 
 <style scoped>
-
 </style>

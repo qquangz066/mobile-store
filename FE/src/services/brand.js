@@ -3,7 +3,7 @@ import {$axios} from "@/http";
 const brandService = {
     async list() {
         return await $axios
-            .get('/brands/')
+            .get('/brands')
             .then(res => res.data);
     },
 };

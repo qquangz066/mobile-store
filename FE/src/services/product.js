@@ -1,9 +1,9 @@
 import {$axios} from "@/http";
 
 const productService = {
-    async list() {
+    async list(params) {
         return await $axios
-            .get('/products/')
+            .get('/products', {params})
             .then(res => res.data);
     },
 };

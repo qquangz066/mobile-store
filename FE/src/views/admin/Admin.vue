@@ -15,13 +15,12 @@
 </template>
 
 <script>
-import BaseLayout from '@/views/BaseLayout';
+import BaseLayout from "@/views/BaseLayout";
 export default {
-name: "Admin",
-  components: {BaseLayout}
-}
+  name: "Admin",
+  components: { BaseLayout },
+};
 </script>
 
 <style scoped>
-
 </style>

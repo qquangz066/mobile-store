@@ -4,8 +4,6 @@ exports.Products = class Products extends Service {
 
   async find(params) {
     params.query.status = 'enable';
-    console.log('test');
-    // let a = super.find(params);
     return await super.find(params);
   }
 

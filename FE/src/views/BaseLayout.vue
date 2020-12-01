@@ -11,17 +11,14 @@
     <footer>
       <slot name="footer"></slot>
     </footer>
-
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'BaseLayout'
+  name: "BaseLayout",
 };
 </script>
 
 <style scoped>
-
 </style>

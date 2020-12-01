@@ -3,7 +3,7 @@ import {$axios} from "@/http";
 const categoryService = {
     async list() {
         return await $axios
-            .get('/categories/')
+            .get('/categories')
             .then(res => res.data);
     },
 };
