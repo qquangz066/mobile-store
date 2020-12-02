@@ -1,5 +1,5 @@
 <template>
-  <ul class="text-center">
+  <ul v-if="isValidPage" class="text-center">
     <li class="pagination-item mr-2">
       <button
           class="snipcart-button"
@@ -70,7 +70,7 @@
 <script>
 export default {
   name: "Pagination",
-
+  emits:["pageChanged"],
   props: {
     maxVisibleButtons: {
       type: Number,
@@ -87,6 +87,10 @@ export default {
     },
     currentPage: {
       type: Number,
+      required: true,
+    },
+    isValidPage: {
+      type: Boolean,
       required: true,
     },
   },

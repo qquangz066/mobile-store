@@ -48,6 +48,7 @@
           :total-pages="totalPages"
           :total="data.total"
           :current-page="activePage"
+          :is-valid-page="isValidPage"
           @page-changed="onPageChange"
       />
     </div>
@@ -63,7 +64,6 @@ export default {
   components: {
     Pagination,
   },
-
   data() {
     return reactive({
       data: {
@@ -76,7 +76,11 @@ export default {
   },
   watch: {
     activePage() {
+      if (!this.isValidPage) {
+        return
+      }
       this.getProducts();
+      document.getElementById('product-section').scrollIntoView({behavior: 'smooth'});
     }
   },
   computed: {
@@ -85,6 +89,9 @@ export default {
     },
     activePage() {
       return parseInt(this.$route.query.page || 1)
+    },
+    isValidPage() {
+      return this.activePage > 0 && this.activePage <= this.totalPages
     },
     products() {
       if (this.data.data === undefined) {
@@ -102,7 +109,6 @@ export default {
 
   methods: {
     async getProducts() {
-      console.log(this.$route.query.page)
       let offset = (this.activePage - 1) * this.data.limit;
       if (this.data.total && offset > this.data.total) {
         offset = this.data.total;
@@ -110,10 +116,9 @@ export default {
       this.data = await this.$services.product.list({$limit: this.data.limit, $skip: offset});
     },
     onPageChange(page) {
-      console.log('page', page)
       if (page !== this.activePage) {
         this.$router.push({
-          name: 'Home',
+          name: 'Product',
           query: {
             page: page
           }

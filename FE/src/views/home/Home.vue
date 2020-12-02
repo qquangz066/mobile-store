@@ -5,7 +5,7 @@
     </template>
 
     <template #default>
-      <Product/>
+      <router-view/>
     </template>
 
     <template #footer>
@@ -19,12 +19,10 @@
 import BaseLayout from "@/views/BaseLayout";
 import Header from "@/views/home/Header";
 import Footer from "@/views/home/Footer";
-import Product from "@/components/home/Product";
 
 export default {
   name: "Home",
   components: {
-    Product,
     Footer,
     Header,
     BaseLayout,

@@ -331,33 +331,6 @@ ul.multi-column-dropdown li a:hover {
     -ms-background-size: cover;
 }
 
-.carousel-item.item2 {
-    background: url(../images/b2.jpg) no-repeat center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -ms-background-size: cover;
-}
-
-.carousel-item.item3 {
-    background: url(../images/b3.jpg) no-repeat center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -ms-background-size: cover;
-}
-
-.carousel-item.item4 {
-    background: url(../images/b4.jpg) no-repeat center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -ms-background-size: cover;
-}
-
 .carousel-item.item4,
 .carousel-item.item3,
 .carousel-item.item2,
@@ -489,17 +462,6 @@ h3.tittle-w3l span {
 
 .snipcart-details button:hover, .snipcart-button:hover {
     background: #000;
-}
-
-.product_list_header input.button {
-    color: #fff;
-    font-size: 14px;
-    outline: none;
-    text-transform: capitalize;
-    padding: .5em 2.5em .5em 1em;
-    border: 1px solid #fe9126;
-    margin: .35em 0 0;
-    background: url(../images/cart.png) no-repeat 116px 9px;
 }
 
 .men-pro-item {
@@ -754,16 +716,6 @@ h3.tittle-w3l span {
     color: #c4c4c4;
 }
 
-.search-hotel form input[type="submit"] {
-    background: url(../images/search.png) no-repeat 13px 11px #0879c9;
-    width: 44px;
-    height: 39px;
-    border: none;
-    padding: 0;
-    margin-top: 0;
-    cursor: pointer;
-}
-
 .search-hotel form input[type="submit"]:hover {
     background-color: #000;
 }
@@ -949,16 +901,6 @@ p.w3l-nut-middle {
 /*-- //product right --*/
 
 /*-- middle section --*/
-
-.join-w3l1 {
-    background: url(../images/bg.jpg) no-repeat center fixed;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -ms-background-size: cover;
-    text-align: center;
-}
 
 .join-agile {
     background: #efedee;
@@ -1213,21 +1155,6 @@ h2.footer-top-head-w3l {
 
 /*-- bottom-to-top --*/
 
-#toTop {
-    display: none;
-    text-decoration: none;
-    position: fixed;
-    bottom: 24px;
-    right: 1%;
-    overflow: hidden;
-    z-index: 999;
-    width: 64px;
-    height: 64px;
-    border: none;
-    text-indent: 100%;
-    background: url("../images/move-up.png") no-repeat 0px 0px;
-}
-
 #toTopHover {
     width: 64px;
     height: 64px;
@@ -1245,16 +1172,6 @@ h2.footer-top-head-w3l {
 
 .page-head_agile_info_w3l {
     background: url(../images/b1.jpg) no-repeat center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -o-background-size: cover;
-    -ms-background-size: cover;
-    -moz-background-size: cover;
-    min-height: 300px;
-}
-
-.page-head_agile_info_w3l-2 {
-    background: url(../images/b3.jpg) no-repeat center;
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
@@ -1500,23 +1417,6 @@ td.invert-image a img {
 .rem {
     position: relative;
 }
-
-.close1,
-.close2,
-.close3 {
-    background: url('../images/close_1.png') no-repeat 0px 0px;
-    cursor: pointer;
-    width: 28px;
-    height: 28px;
-    position: absolute;
-    right: 15px;
-    top: -13px;
-    -webkit-transition: color 0.2s ease-in-out;
-    -moz-transition: color 0.2s ease-in-out;
-    -o-transition: color 0.2s ease-in-out;
-    transition: color 0.2s ease-in-out;
-}
-
 /*-- quantity-starts --*/
 
 .value-minus,
@@ -1973,17 +1873,6 @@ h3.title:before {
 }
 
 /*-- //welcome --*/
-
-/*-- testimonials --*/
-
-.testimonials {
-    background: url(../images/bg2.jpg) no-repeat center fixed;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -o-background-size: cover;
-    -ms-background-size: cover;
-    -moz-background-size: cover;
-}
 
 .med-testi {
     position: relative;
