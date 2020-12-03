@@ -75,7 +75,7 @@ exports.initDB = async function (app) {
           name: 'iPhone 11 128GB',
           category_id: phone_category._id,
           brand_id: apple_brand._id,
-          description: [
+          specs: [
             {
               name: 'Màn hình',
               value: 'IPS LCD, 6.1", Liquid Retina'
@@ -112,7 +112,7 @@ exports.initDB = async function (app) {
               value: '3110 mAh, có sạc nhanh'
             }
           ],
-          offer: [
+          offers: [
             {
               name: 'Giảm giá 1,500,000đ'
             },
@@ -121,7 +121,7 @@ exports.initDB = async function (app) {
             }
           ],
           image: base64Encode('iphone-11-128-1.jpg'),
-          gallery:[],
+          gallery: [base64Encode('iphone-11-128-2.jpg'), base64Encode('iphone-11-128-3.jpg'), base64Encode('iphone-11-128-4.jpg')],
           price: 21990000,
           old_price: 0,
           quality: 100,
@@ -133,7 +133,7 @@ exports.initDB = async function (app) {
           name: 'iPhone 12 Pro 512GB',
           category_id: phone_category._id,
           brand_id: apple_brand._id,
-          description: [
+          specs: [
             {
               name: 'Màn hình',
               value: 'OLED, 6.1", Super Retina XDR'
@@ -170,11 +170,9 @@ exports.initDB = async function (app) {
               value: '3110 mAh, có sạc nhanh'
             }
           ],
-          offer: [
-
-          ],
+          offers: [],
           image: base64Encode('iphone-12-pro-512gb.jpg'),
-          gallery:[],
+          gallery: [],
           price: 40990000,
           old_price: 0,
           quality: 100,
@@ -186,7 +184,7 @@ exports.initDB = async function (app) {
           name: 'iPhone 12 mini 64GB',
           category_id: phone_category._id,
           brand_id: apple_brand._id,
-          description: [
+          specs: [
             {
               name: 'Màn hình',
               value: 'OLED, 5.4", Super Retina XDR'
@@ -223,11 +221,9 @@ exports.initDB = async function (app) {
               value: '2227 mAh, có sạc nhanh'
             }
           ],
-          offer: [
-
-          ],
+          offers: [],
           image: base64Encode('iphone-12-mini-blue.jpg'),
-          gallery:[],
+          gallery: [],
           price: 40990000,
           old_price: 0,
           quality: 100,
@@ -239,7 +235,7 @@ exports.initDB = async function (app) {
           name: 'Samsung Galaxy Note 20 Ultra',
           category_id: phone_category._id,
           brand_id: samsung_brand._id,
-          description: [
+          specs: [
             {
               name: 'Màn hình',
               value: 'Dynamic AMOLED 2X, 6.9", Quad HD+ (2K+)'
@@ -276,7 +272,7 @@ exports.initDB = async function (app) {
               value: '4500 mAh, có sạc nhanh'
             }
           ],
-          offer: [
+          offers: [
             {
               name: 'Trả góp 0% thẻ tín dụng'
             },
@@ -285,7 +281,7 @@ exports.initDB = async function (app) {
             }
           ],
           image: base64Encode('samsung-galaxy-note-20-ultra.jpg'),
-          gallery:[],
+          gallery: [],
           price: 21990000,
           old_price: 0,
           quality: 100,
@@ -297,7 +293,7 @@ exports.initDB = async function (app) {
           name: 'Samsung Galaxy S20 FE',
           category_id: phone_category._id,
           brand_id: samsung_brand._id,
-          description: [
+          specs: [
             {
               name: 'Màn hình',
               value: 'Dynamic AMOLED 2X, 6.9", Quad HD+ (2K+)'
@@ -334,7 +330,7 @@ exports.initDB = async function (app) {
               value: '4500 mAh, có sạc nhanh'
             }
           ],
-          offer: [
+          offers: [
             {
               name: 'Trả góp 0% thẻ tín dụng'
             },
@@ -343,7 +339,7 @@ exports.initDB = async function (app) {
             }
           ],
           image: base64Encode('samsung-galaxy-s20.jpg'),
-          gallery:[],
+          gallery: [],
           price: 15990000,
           old_price: 16000000,
           quality: 100,
@@ -355,7 +351,7 @@ exports.initDB = async function (app) {
           name: 'Samsung Galaxy A11',
           category_id: phone_category._id,
           brand_id: samsung_brand._id,
-          description: [
+          specs: [
             {
               name: 'Màn hình',
               value: 'Dynamic AMOLED 2X, 6.9", Quad HD+ (2K+)'
@@ -392,7 +388,7 @@ exports.initDB = async function (app) {
               value: '4500 mAh, có sạc nhanh'
             }
           ],
-          offer: [
+          offers: [
             {
               name: 'Trả góp 0% thẻ tín dụng'
             },
@@ -401,7 +397,7 @@ exports.initDB = async function (app) {
             }
           ],
           image: base64Encode('samsung-galaxy-a11.jpg'),
-          gallery:[],
+          gallery: [],
           price: 3590000,
           old_price: 4590000,
           quality: 100,
@@ -413,7 +409,7 @@ exports.initDB = async function (app) {
           name: 'Samsung Galaxy A11',
           category_id: phone_category._id,
           brand_id: samsung_brand._id,
-          description: [
+          specs: [
             {
               name: 'Màn hình',
               value: 'Dynamic AMOLED 2X, 6.9", Quad HD+ (2K+)'
@@ -450,7 +446,7 @@ exports.initDB = async function (app) {
               value: '4500 mAh, có sạc nhanh'
             }
           ],
-          offer: [
+          offers: [
             {
               name: 'Trả góp 0% thẻ tín dụng'
             },
@@ -459,7 +455,7 @@ exports.initDB = async function (app) {
             }
           ],
           image: base64Encode('samsung-galaxy-a11.jpg'),
-          gallery:[],
+          gallery: [],
           price: 3590000,
           old_price: 4590000,
           quality: 100,
@@ -470,7 +466,7 @@ exports.initDB = async function (app) {
           name: 'Xiaomi Mi 10T Pro 5G',
           category_id: phone_category._id,
           brand_id: xiaomi_brand._id,
-          description: [
+          specs: [
             {
               name: 'Màn hình',
               value: 'IPS LCD, 6.67", Full HD+'
@@ -507,13 +503,13 @@ exports.initDB = async function (app) {
               value: '5000 mAh, có sạc nhanh'
             }
           ],
-          offer: [
+          offers: [
             {
               name: 'Bảo hành 24 tháng chính hãng '
             }
           ],
           image: base64Encode('xiaomi-mi-10t-pro.jpg'),
-          gallery:[],
+          gallery: [],
           price: 11990000,
           old_price: 12990000,
           quality: 10,

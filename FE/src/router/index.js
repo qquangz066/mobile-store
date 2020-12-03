@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import Home from '../views/home/Home.vue';
 import ProductDetail from "@/components/home/ProductDetail";
-import Product from "@/components/home/Product";
+import ProductList from "@/components/home/ProductList";
 
 const routes = [
     {
@@ -11,8 +11,8 @@ const routes = [
         children: [
             {
                 path: '',
-                name: 'Product',
-                component: Product
+                name: 'ProductList',
+                component: ProductList
             },
             {
                 path: '/products/:id',
@@ -21,7 +21,7 @@ const routes = [
             },
             {
                 path: "/:catchAll(.*)",
-                redirect: {name: "Product"}
+                redirect: {name: "ProductList"}
             }
         ]
     },

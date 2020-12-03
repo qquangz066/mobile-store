@@ -24,34 +24,10 @@
         Please enable it to continue.</strong>
 </noscript>
 <div id="app"></div>
-<!-- built files will be auto injected -->
 
 <script src="<%= BASE_URL %>js/jquery-2.2.3.min.js"></script>
 <script src="<%= BASE_URL %>js/bootstrap.js"></script>
-
 <script defer src="<%= BASE_URL %>js/jquery.flexslider.js"></script>
 
-<script>
-    $(window).load(function () {
-        $('#carousel').flexslider({
-            animation: "slide",
-            controlNav: false,
-            animationLoop: false,
-            slideshow: false,
-            itemWidth: 210,
-            itemMargin: 5,
-            asNavFor: '#slider'
-        });
-
-        $('#slider').flexslider({
-            animation: "slide",
-            controlNav: false,
-            animationLoop: false,
-            slideshow: false,
-            sync: "#carousel"
-        });
-    });
-</script>
-<!-- //FlexSlider-->
 </body>
 </html>
