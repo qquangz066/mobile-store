@@ -133,7 +133,7 @@
             </div>
             <Pagination
                 :total-pages="totalPages"
-                :total="data.total"
+                :total="productPage.total"
                 :current-page="activePage"
                 :is-valid-page="isValidPage"
                 @page-changed="onPageChange"
@@ -156,7 +156,7 @@ export default {
   },
   data() {
     return reactive({
-      data: {
+      productPage: {
         data: [],
         skip: 0,
         limit: 6,
@@ -176,7 +176,7 @@ export default {
   },
   computed: {
     totalPages() {
-      return Math.floor(this.data.total / this.data.limit) + 1
+      return Math.floor(this.productPage.total / this.productPage.limit) + 1
     },
     activePage() {
       return parseInt(this.$route.query.page || 1)
@@ -185,11 +185,11 @@ export default {
       return this.activePage > 0 && this.activePage <= this.totalPages
     },
     products() {
-      if (this.data.data === undefined) {
+      if (this.productPage.data === undefined) {
         return [];
       }
 
-      let products = [...this.data.data];
+      let products = [...this.productPage.data];
       let partitionProducts = [],
           size = 3;
       while (products.length > 0)
@@ -203,11 +203,11 @@ export default {
 
   methods: {
     async getProducts() {
-      let offset = (this.activePage - 1) * this.data.limit;
-      if (this.data.total && offset > this.data.total) {
-        offset = this.data.total;
+      let offset = (this.activePage - 1) * this.productPage.limit;
+      if (this.productPage.total && offset > this.productPage.total) {
+        offset = this.productPage.total;
       }
-      this.data = await this.$services.product.list({$limit: this.data.limit, $skip: offset});
+      this.productPage = await this.$services.product.list({$limit: this.productPage.limit, $skip: offset});
     },
     async getBrands() {
       this.brandPage = await this.$services.brand.list();
