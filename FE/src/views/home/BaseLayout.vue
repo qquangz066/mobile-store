@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid pl-0 pr-0">
+  <div>
     <header>
       <slot name="header"></slot>
     </header>

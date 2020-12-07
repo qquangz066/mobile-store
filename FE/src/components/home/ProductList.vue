@@ -10,7 +10,7 @@
               <div class="left-side py-2">
                 <ul v-for="(brand, index) in brands" :key="index">
                   <li>
-                    <input type="checkbox" class="checked"/>
+                    <input type="checkbox" class="checked" :value="brand._id" v-model="checkedBrands"/>
                     <span class="span">{{ brand.text }}</span>
                   </li>
                 </ul>
@@ -131,12 +131,12 @@
                 </div>
               </div>
             </div>
-            <Pagination
-                :total-pages="totalPages"
-                :total="productPage.total"
-                :current-page="activePage"
-                :is-valid-page="isValidPage"
-                @page-changed="onPageChange"
+            <Pagination v-if="productPage.data.length>0"
+                        :total-pages="totalPages"
+                        :total="productPage.total"
+                        :current-page="activePage"
+                        :is-valid-page="isValidPage"
+                        @page-changed="onPageChange"
             />
           </div>
         </div>
@@ -162,7 +162,8 @@ export default {
         limit: 6,
         total: 0
       },
-      brandPage: {}
+      brandPage: {},
+      checkedBrands: []
     });
   },
   watch: {
@@ -170,11 +171,22 @@ export default {
       if (this.$route.name !== 'ProductList' || !this.isValidPage) {
         return
       }
-      this.getProducts();
+      this.getProducts(this.requestParams);
       document.getElementById('product-section').scrollIntoView({behavior: 'smooth'});
+    },
+    async checkedBrands() {
+      await this.$router.replace({'query': null});
+      this.productPage = await this.$services.product.list(this.requestParams);
     }
   },
   computed: {
+    requestParams() {
+      let offset = (this.activePage - 1) * this.productPage.limit;
+      if (this.productPage.total && offset > this.productPage.total) {
+        offset = this.productPage.total;
+      }
+      return {$limit: this.productPage.limit, $skip: offset, ['brand_id[$in]']: this.checkedBrands}
+    },
     totalPages() {
       return Math.floor(this.productPage.total / this.productPage.limit) + 1
     },
@@ -202,12 +214,8 @@ export default {
   },
 
   methods: {
-    async getProducts() {
-      let offset = (this.activePage - 1) * this.productPage.limit;
-      if (this.productPage.total && offset > this.productPage.total) {
-        offset = this.productPage.total;
-      }
-      this.productPage = await this.$services.product.list({$limit: this.productPage.limit, $skip: offset});
+    async getProducts(params) {
+      this.productPage = await this.$services.product.list(params);
     },
     async getBrands() {
       this.brandPage = await this.$services.brand.list();
@@ -226,7 +234,7 @@ export default {
 
   created() {
     this.getBrands();
-    this.getProducts();
+    this.getProducts(this.requestParams);
   },
 };
 </script>

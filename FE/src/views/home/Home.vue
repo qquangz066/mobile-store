@@ -16,7 +16,7 @@
 
 <script>
 // @ is an alias to /src
-import BaseLayout from "@/views/BaseLayout";
+import BaseLayout from "@/views/home/BaseLayout";
 import Header from "@/views/home/Header";
 import Footer from "@/views/home/Footer";
 
@@ -29,3 +29,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import '../../assets/css/bootstrap.css';
+@import '../../assets/css/style.css';
+@import '../../assets/css/flexslider.css';
+</style>
