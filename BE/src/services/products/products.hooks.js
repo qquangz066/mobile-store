@@ -1,6 +1,7 @@
 const {disallow} = require('feathers-hooks-common');
 
 const searchRegex = function () {
+  //sample url
   //http://localhost:3030/products?$or[0][name][$search]=xiaomi&$or[1][name][$search]=phone&$or[2][name][$search]=samsung
   return function (hook) {
     const query = hook.params.query;
