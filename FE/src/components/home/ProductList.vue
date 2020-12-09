@@ -148,9 +148,11 @@
 <script>
 import Pagination from "@/components/Pagination";
 import {reactive} from "vue";
+import ListProduct from "@/mixins/list_product";
 
 export default {
   name: "ProductList",
+  mixins: [ListProduct],
   components: {
     Pagination,
   },
@@ -171,7 +173,7 @@ export default {
       if (this.$route.name !== 'ProductList' || !this.isValidPage) {
         return
       }
-      this.getProducts(this.requestParams);
+      this.getProducts();
       document.getElementById('product-section').scrollIntoView({behavior: 'smooth'});
     },
     async checkedBrands() {
@@ -181,20 +183,7 @@ export default {
   },
   computed: {
     requestParams() {
-      let offset = (this.activePage - 1) * this.productPage.limit;
-      if (this.productPage.total && offset > this.productPage.total) {
-        offset = this.productPage.total;
-      }
-      return {$limit: this.productPage.limit, $skip: offset, ['brand_id[$in]']: this.checkedBrands}
-    },
-    totalPages() {
-      return Math.floor(this.productPage.total / this.productPage.limit) + 1
-    },
-    activePage() {
-      return parseInt(this.$route.query.page || 1)
-    },
-    isValidPage() {
-      return this.activePage > 0 && this.activePage <= this.totalPages
+      return {...this.getLimitAndSkip(), ['brand_id[$in]']: this.checkedBrands}
     },
     products() {
       if (this.productPage.data === undefined) {
@@ -214,8 +203,8 @@ export default {
   },
 
   methods: {
-    async getProducts(params) {
-      this.productPage = await this.$services.product.list(params);
+    async getProducts() {
+      this.productPage = await this.$services.product.list(this.requestParams);
     },
     async getBrands() {
       this.brandPage = await this.$services.brand.list();
@@ -234,7 +223,7 @@ export default {
 
   created() {
     this.getBrands();
-    this.getProducts(this.requestParams);
+    this.getProducts();
   },
 };
 </script>

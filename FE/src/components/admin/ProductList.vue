@@ -2,74 +2,47 @@
   <div class="row">
     <div class="col">
       <div class="card">
-        <!-- Card header -->
-        <div class="card-header border-0">
-          <h3 class="mb-0">Light table</h3>
+        <div class=" card-header border-0">
+          <div class="row align-items-center">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 d-inline-block mb-0">Products</h6>
+            </div>
+            <div class="col-lg-6 col-5 text-right">
+              <a href="#" class="btn btn-sm btn-neutral">New</a>
+              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+            </div>
+          </div>
         </div>
+
         <!-- Light table -->
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
             <tr>
-              <th scope="col" class="sort" data-sort="name">Project</th>
-              <th scope="col" class="sort" data-sort="budget">Budget</th>
-              <th scope="col" class="sort" data-sort="status">Status</th>
-              <th scope="col">Users</th>
-              <th scope="col" class="sort" data-sort="completion">Completion</th>
+              <th scope="col">Image</th>
+              <th scope="col">Name<i class="fas fa-sort text-right"/></th>
+              <th scope="col">Brand<i class="fas fa-sort text-right"/></th>
+              <th scope="col">Quality<i class="fas fa-sort text-right"/></th>
+              <th scope="col">Status<i class="fas fa-sort text-right"/></th>
               <th scope="col"></th>
             </tr>
             </thead>
             <tbody class="list">
-            <tr>
-              <th scope="row">
-                <div class="media align-items-center">
-                  <a href="#" class="avatar rounded-circle mr-3">
-                    <!--                            <img alt="Image placeholder" src="../assets/img/theme/bootstrap.jpg">-->
-                  </a>
-                  <div class="media-body">
-                    <span class="name mb-0 text-sm">Argon Design System</span>
-                  </div>
-                </div>
-              </th>
+            <tr v-for="(product, index) in products" :key="index">
+              <td>
+                <img style="width: auto; height: 100px" :src="'data:image/jpg;base64,' + product.image">
+              </td>
               <td class="budget">
-                $2500 USD
+                {{ product.name }}
               </td>
               <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-warning"></i>
-                        <span class="status">pending</span>
-                      </span>
+                {{ product.brand?.name }}
               </td>
               <td>
-                <div class="avatar-group">
-                  <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                     data-original-title="Ryan Tompson">
-                    <!--                            <img alt="Image placeholder" src="../assets/img/theme/team-1.jpg">-->
-                  </a>
-                  <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                     data-original-title="Romina Hadid">
-                    <!--                            <img alt="Image placeholder" src="../assets/img/theme/team-2.jpg">-->
-                  </a>
-                  <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                     data-original-title="Alexander Smith">
-                    <!--                            <img alt="Image placeholder" src="../assets/img/theme/team-3.jpg">-->
-                  </a>
-                  <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                     data-original-title="Jessica Doe">
-                    <!--                            <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg">-->
-                  </a>
-                </div>
+                {{ product.quality }}
               </td>
               <td>
-                <div class="d-flex align-items-center">
-                  <span class="completion mr-2">60%</span>
-                  <div>
-                    <div class="progress">
-                      <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                           aria-valuemax="100" style="width: 60%;"></div>
-                    </div>
-                  </div>
-                </div>
+                {{ product.status }}
               </td>
               <td class="text-right">
                 <div class="dropdown">
@@ -78,9 +51,9 @@
                     <i class="fas fa-ellipsis-v"></i>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <button class="dropdown-item">Edit</button>
+                    <button class="dropdown-item" @click="deleteProduct(product._id)">Delete</button>
+
                   </div>
                 </div>
               </td>
@@ -88,42 +61,32 @@
             </tbody>
           </table>
         </div>
-        <!-- Card footer -->
         <div class="card-footer py-4">
-          <nav aria-label="...">
-            <ul class="pagination justify-content-end mb-0">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">
-                  <i class="fas fa-angle-left"></i>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  <i class="fas fa-angle-right"></i>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <Pagination v-if="productPage.data.length>0"
+                      :total-pages="totalPages"
+                      :total="productPage.total"
+                      :current-page="activePage"
+                      :is-valid-page="isValidPage"
+                      @page-changed="onPageChange"
+          />
         </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
 import {reactive} from "vue";
+import Pagination from "@/components/Pagination";
+import ListProduct from "@/mixins/list_product";
 
 export default {
   name: "AdminProductList",
+  mixins: [ListProduct],
+  components: {
+    Pagination,
+  },
   data() {
     return reactive({
       productPage: {
@@ -139,41 +102,41 @@ export default {
       if (this.$route.name !== 'AdminProductList' || !this.isValidPage) {
         return
       }
-      this.getProducts(this.requestParams);
+      this.getProducts();
     }
   },
   computed: {
     requestParams() {
-      let offset = (this.activePage - 1) * this.productPage.limit;
-      if (this.productPage.total && offset > this.productPage.total) {
-        offset = this.productPage.total;
+      return {
+        ...this.getLimitAndSkip(),
+        '$populate[0]': 'brand',
+        '$populate[1]': 'category'
       }
-      return {$limit: this.productPage.limit, $skip: offset}
     },
-    totalPages() {
-      return Math.floor(this.productPage.total / this.productPage.limit) + 1
-    },
-    activePage() {
-      return parseInt(this.$route.query.page || 1)
-    },
-    isValidPage() {
-      return this.activePage > 0 && this.activePage <= this.totalPages
-    },
-    products() {
-      return this.productPage.data || [];
-    },
-
   },
 
   methods: {
-    async getProducts(params) {
-      this.productPage = await this.$services.product.list(params);
+    async getProducts() {
+      this.productPage = await this.$services.admin.product.list(this.requestParams);
     },
-
+    onPageChange(page) {
+      if (page !== this.activePage) {
+        this.$router.push({
+          name: 'AdminProductList',
+          query: {
+            page: page
+          }
+        });
+      }
+    },
+    async deleteProduct(id) {
+      await this.$services.admin.product.delete(id);
+      await this.getProducts();
+    }
   },
 
   created() {
-    this.getProducts(this.requestParams);
+    this.getProducts();
   },
 }
 </script>

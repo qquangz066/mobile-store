@@ -13,15 +13,16 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="dashboard.html">
-                <i class="ni ni-tv-2 text-primary"></i>
-                <span class="nav-link-text">Dashboard</span>
-              </a>
+              <router-link :to="{ name: 'AdminProductList'}"
+                           :class="'nav-link ' + ($route.name==='AdminProductList'? 'active' : '')">
+                <span class="nav-link-text">Products</span>
+              </router-link>
+
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="icons.html">
-                <i class="ni ni-planet text-orange"></i>
-                <span class="nav-link-text">Icons</span>
+              <a :class="'nav-link ' + ($route.name==='AdminBrandList'? 'active' : '')" href="javascript:void(0)">
+
+                <span class="nav-link-text">Brands</span>
               </a>
             </li>
           </ul>
