@@ -1,18 +1,18 @@
-import {$axios} from "@/http";
+import {$http} from "@/http";
 
 const productService = {
     async list(params) {
-        return await $axios
+        return await $http
             .get('/admin/products', {params})
             .then(res => res.data);
     },
     async get(id) {
-        return await $axios
+        return await $http
             .get(`/admin/products/${id}`)
             .then(res => res.data);
     },
     async delete(id) {
-        return await $axios
+        return await $http
             .delete(`/admin/products/${id}`)
             .then(res => res.data);
     },
