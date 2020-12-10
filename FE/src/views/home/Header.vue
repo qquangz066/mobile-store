@@ -5,7 +5,10 @@
       <div class="row main-top-w3l py-2">
         <div class="col-lg-12 header-right mt-lg-0 mt-2 text-right">
           <ul>
-            <li class="text-center border-right text-white">
+            <li class="text-center " v-if="auth?.user" >
+              <p class="text-white" style="font-size: 18px;"><i class="fas fa-user p-2"></i>{{ auth.user.name }}</p>
+            </li>
+            <li class="text-center border-right text-white" v-if="!auth?.user">
               <a
                   href="#"
                   data-toggle="modal"
@@ -15,7 +18,7 @@
                 <i class="fas fa-sign-in-alt mr-2"></i>Đăng nhập
               </a>
             </li>
-            <li class="text-center text-white">
+            <li class="text-center text-white" v-if="!auth?.user">
               <a
                   href="#"
                   data-toggle="modal"
@@ -198,7 +201,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav text-center mr-xl-5">
-            <li class="nav-item mr-lg-2 mb-lg-0 mb-2" >
+            <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
               <a class="nav-link" href="index.html">Điện thoại</a>
             </li>
             <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
@@ -218,9 +221,14 @@
 
 <script>
 import Login from "@/components/Login";
+import {mapGetters} from "vuex";
+
 export default {
   name: "Header",
   components: {Login},
+  computed: {
+    ...mapGetters(['auth'])
+  }
 };
 </script>
 

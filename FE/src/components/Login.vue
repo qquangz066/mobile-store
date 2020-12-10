@@ -5,6 +5,7 @@
         type="text"
         class="form-control"
         v-model="email"
+        @keyup.enter="login"
     />
   </div>
   <div class="form-group">
@@ -13,6 +14,7 @@
         type="password"
         class="form-control"
         v-model="password"
+        @keyup.enter="login"
     />
   </div>
   <div class="right-w3l">
@@ -22,24 +24,23 @@
 </template>
 
 <script>
-import {reactive} from "vue";
+
+import {LOGIN} from "@/store/actions.type";
 
 export default {
   name: "Login",
   data() {
-    return reactive({
+    return {
       email: '',
       password: ''
-    })
+    }
   },
   methods: {
     async login() {
       if (this.email !== '' && this.password !== '') {
-        let result = await this.$services.auth.login(this.email, this.password)
+        let result = await this.$store.dispatch(LOGIN, {email: this.email, password: this.password});
         if (result) {
-          await this.$router.push({
-            name: 'Home'
-          });
+          window.$('#loginModal').modal('hide');
         }
       }
     }

@@ -58,14 +58,13 @@
 </template>
 
 <script>
-import {reactive} from "vue";
 
 export default {
   name: "ProductDetail",
   data() {
-    return reactive({
+    return {
       data: {}
-    });
+    }
   },
   methods: {
     async getProduct() {

@@ -29,10 +29,10 @@ $http.interceptors.response.use(
         // Do something with response data
         return response;
     },
-    function (error) {
+    async function (error) {
         // Do something with response error
         if (error.response && error.response.status === 401) {
-            auth.logout()
+            await auth.logout()
         }
         return Promise.reject(error);
     }

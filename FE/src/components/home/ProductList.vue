@@ -147,7 +147,6 @@
 
 <script>
 import Pagination from "@/components/Pagination";
-import {reactive} from "vue";
 import ListProduct from "@/mixins/list_product";
 
 export default {
@@ -157,7 +156,7 @@ export default {
     Pagination,
   },
   data() {
-    return reactive({
+    return {
       productPage: {
         data: [],
         skip: 0,
@@ -166,7 +165,7 @@ export default {
       },
       brandPage: {},
       checkedBrands: []
-    });
+    }
   },
   watch: {
     activePage() {
