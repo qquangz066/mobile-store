@@ -1,7 +1,5 @@
 import {$http} from "@/http";
 import router from "@/router";
-import store from '@/store';
-import {LOGOUT} from "@/store/actions.type";
 
 let localStorage = global.window.localStorage;
 
@@ -21,7 +19,6 @@ export default {
             })
     },
     async logout() {
-        await store.dispatch(LOGOUT)
         localStorage.removeItem("auth");
         await router.push('/')
     },

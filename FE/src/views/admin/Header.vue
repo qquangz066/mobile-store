@@ -28,9 +28,7 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                aria-expanded="false">
               <div class="media align-items-center">
-<!--                  <span class="avatar avatar-sm rounded-circle">-->
                 <i class="fas fa-user-circle fa-2x"></i>
-<!--                  </span>-->
                 <div class="media-body  ml-2  d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
                 </div>
@@ -57,10 +55,10 @@
                 <span>Support</span>
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#!" class="dropdown-item">
+              <button class="dropdown-item" @click="logout" style="cursor: pointer">
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
-              </a>
+              </button>
             </div>
           </li>
         </ul>
@@ -71,8 +69,15 @@
 </template>
 
 <script>
+import {LOGOUT} from "@/store/actions.type";
+
 export default {
   name: "Header",
+  methods: {
+    logout() {
+      this.$store.dispatch(LOGOUT);
+    }
+  }
 };
 </script>
 

@@ -16,13 +16,9 @@ const routes = [
                 component: ProductList
             },
             {
-                path: '/products/:id',
+                path: ':id',
                 name: 'ProductDetail',
                 component: ProductDetail
-            },
-            {
-                path: "/:catchAll(.*)",
-                redirect: {name: "ProductList"}
             }
         ]
     },
@@ -30,15 +26,26 @@ const routes = [
         path: '/admin',
         name: 'Admin',
         component: () => import( '../views/admin/Admin.vue'),
-        meta: {requiresAuth: true},
+        meta: {requiresAuth: true, roles: ['admin']},
         children: [
             {
-                path: '',
+                alias: '',
+                path: 'products',
                 name: 'AdminProductList',
                 component: () => import( '../components/admin/ProductList.vue'),
-                meta: {requiresAuth: true}
+                meta: {requiresAuth: true, roles: ['admin']}
+            },
+            {
+                path: ':id',
+                name: 'AdminProductDetail',
+                component: () => import( '../components/admin/ProductDetail.vue'),
+                meta: {requiresAuth: true, roles: ['admin']}
             }
         ]
+    },
+    {
+        path: "/:catchAll(.*)",
+        redirect: {name: "ProductList"}
     }
 ];
 
@@ -49,15 +56,20 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        // this route requires auth, check if logged in
-        // if not, redirect to login page.
         if (!store.state?.auth?.auth?.user) {
             next({
                 path: '/',
                 // query: { redirect: to.fullPath }
             })
         } else {
-            next()
+            if (to.matched.some(record => record.meta.roles
+                && !(record.meta.roles.includes(store.state?.auth?.auth?.user?.role)))) {
+                next({
+                    path: '/'
+                })
+            } else {
+                next()
+            }
         }
     } else {
         next() // make sure to always call next()!

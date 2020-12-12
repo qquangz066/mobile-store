@@ -5,8 +5,35 @@
       <div class="row main-top-w3l py-2">
         <div class="col-lg-12 header-right mt-lg-0 mt-2 text-right">
           <ul>
-            <li class="text-center " v-if="auth?.user" >
-              <p class="text-white" style="font-size: 18px;"><i class="fas fa-user p-2"></i>{{ auth.user.name }}</p>
+            <li v-if="auth?.user" class="nav-item dropdown ">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                 aria-expanded="false">
+                <span class="media text-left text-white align-items-center">
+                  <i class="fas fa-user-circle" style="font-size: 22px;"></i>
+                  <div class="media-body">
+                    <span class="font-weight-bold pl-1 ">{{ auth.user.name }}</span>
+                  </div>
+                </span>
+              </a>
+              <div class="dropdown-menu  dropdown-menu-left ">
+                <a href="#!" class="dropdown-item">
+                  <i class="ni ni-single-02"></i>
+                  <span>My profile</span>
+                </a>
+                <a href="#!" class="dropdown-item">
+                  <i class="ni ni-settings-gear-65"></i>
+                  <span>Settings</span>
+                </a>
+                <a href="#!" class="dropdown-item">
+                  <i class="ni ni-calendar-grid-58"></i>
+                  <span>Activity</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item" @click="logout" style="cursor: pointer">
+                  <i class="ni ni-user-run"></i>
+                  <span>Logout</span>
+                </button>
+              </div>
             </li>
             <li class="text-center border-right text-white" v-if="!auth?.user">
               <a
@@ -222,12 +249,18 @@
 <script>
 import Login from "@/components/Login";
 import {mapGetters} from "vuex";
+import {LOGOUT} from '@/store/actions.type';
 
 export default {
   name: "Header",
   components: {Login},
   computed: {
     ...mapGetters(['auth'])
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch(LOGOUT);
+    }
   }
 };
 </script>

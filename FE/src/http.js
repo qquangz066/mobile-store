@@ -1,6 +1,8 @@
 import axios from "axios";
 import constants from "./constants";
 import auth from "@/services/auth";
+import store from "@/store";
+import {LOGOUT} from "@/store/actions.type";
 
 let config = {
     baseURL: constants.host,
@@ -32,7 +34,7 @@ $http.interceptors.response.use(
     async function (error) {
         // Do something with response error
         if (error.response && error.response.status === 401) {
-            await auth.logout()
+            await store.dispatch(LOGOUT)
         }
         return Promise.reject(error);
     }

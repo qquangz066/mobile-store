@@ -8,14 +8,14 @@
               <div id="slider" class="flexslider">
                 <ul class="slides">
                   <li v-for="(image,index) in data.gallery" :key="index">
-                    <img :src="`data:image/jpg;base64, ${image}` "/>
+                    <img :src="image"/>
                   </li>
                 </ul>
               </div>
               <div id="carousel" class="flexslider">
                 <ul class="slides">
                   <li v-for="(image,index) in data.gallery" :key="index">
-                    <img :src="`data:image/jpg;base64, ${image}` "/>
+                    <img :src="image"/>
                   </li>
                 </ul>
               </div>

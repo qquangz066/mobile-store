@@ -15,6 +15,7 @@ const actions = {
         return data
     },
     async [LOGOUT](context) {
+        await auth.logout()
         context.commit(SET_AUTH, null);
     },
 }

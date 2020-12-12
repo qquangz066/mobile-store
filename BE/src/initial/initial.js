@@ -5,7 +5,7 @@ function base64Encode(file) {
   // read binary data
   const bitmap = fs.readFileSync(path.resolve(__dirname, file));
   // convert binary data to base64 encoded string
-  return new Buffer.from(bitmap).toString('base64');
+  return `data:image/${path.extname(file).substr(1)};base64,` + new Buffer.from(bitmap).toString('base64');
 }
 
 exports.initDB = async function (app) {

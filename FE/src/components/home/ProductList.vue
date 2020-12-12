@@ -102,7 +102,7 @@
                     <div class="men-thumb-item text-center">
                       <img
                           style="width: auto; height: 200px"
-                          :src="'data:image/jpg;base64,' + product.image"
+                          :src="product.image"
                       />
                       <div class="men-cart-pro">
                         <div class="inner-men-cart-pro">

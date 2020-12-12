@@ -30,7 +30,7 @@
             <tbody class="list">
             <tr v-for="(product, index) in products" :key="index">
               <td>
-                <img style="width: auto; height: 100px" :src="'data:image/jpg;base64,' + product.image">
+                <img style="width: auto; height: 100px" :src="product.image">
               </td>
               <td class="budget">
                 {{ product.name }}
@@ -51,7 +51,9 @@
                     <i class="fas fa-ellipsis-v"></i>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                    <button class="dropdown-item">Edit</button>
+                    <router-link :to="{ name: 'AdminProductDetail', params: { id: product._id }}"
+                                 class="dropdown-item">Edit
+                    </router-link>
                     <button class="dropdown-item" @click="deleteProduct(product._id)">Delete</button>
 
                   </div>

@@ -2,6 +2,7 @@ import productService from "@/services/product";
 import productAdminService from "@/services/admin_product";
 import categoryService from "@/services/category";
 import brandService from "@/services/brand";
+import brandAdminService from "@/services/admin_brand";
 import auth from "@/services/auth";
 
 export default {
@@ -10,6 +11,7 @@ export default {
     category: categoryService,
     brand: brandService,
     admin: {
-        product: productAdminService
+        product: productAdminService,
+        brand: brandAdminService
     }
 }
