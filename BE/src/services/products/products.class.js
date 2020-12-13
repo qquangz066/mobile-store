@@ -1,14 +1,5 @@
-const {Service} = require('feathers-mongoose');
+const {UserBaseService} = require('../user_base_service');
 
-exports.Products = class Products extends Service {
+exports.Products = class Products extends UserBaseService {
 
-  async find(params) {
-    params.query.status = 'enable';
-    return await super.find(params);
-  }
-
-  async get(id, params) {
-    params.query.status = 'enable';
-    return await super.get(id, params);
-  }
 };

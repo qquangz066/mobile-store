@@ -131,9 +131,9 @@
                 </div>
               </div>
             </div>
-            <Pagination v-if="productPage.data.length>0"
+            <Pagination v-if="page.data.length>0"
                         :total-pages="totalPages"
-                        :total="productPage.total"
+                        :total="page.total"
                         :current-page="activePage"
                         :is-valid-page="isValidPage"
                         @page-changed="onPageChange"
@@ -147,7 +147,7 @@
 
 <script>
 import Pagination from "@/components/Pagination";
-import ListProduct from "@/mixins/list_product";
+import ListProduct from "@/mixins/page";
 
 export default {
   name: "ProductList",
@@ -157,7 +157,7 @@ export default {
   },
   data() {
     return {
-      productPage: {
+      page: {
         data: [],
         skip: 0,
         limit: 6,
@@ -177,7 +177,7 @@ export default {
     },
     async checkedBrands() {
       await this.$router.replace({'query': null});
-      this.productPage = await this.$services.product.list(this.requestParams);
+      this.page = await this.$services.product.list(this.requestParams);
     }
   },
   computed: {
@@ -185,11 +185,11 @@ export default {
       return {...this.getLimitAndSkip(), ['brand_id[$in]']: this.checkedBrands}
     },
     products() {
-      if (this.productPage.data === undefined) {
+      if (this.page.data === undefined) {
         return [];
       }
 
-      let products = [...this.productPage.data];
+      let products = [...this.page.data];
       let partitionProducts = [],
           size = 3;
       while (products.length > 0)
@@ -203,7 +203,7 @@ export default {
 
   methods: {
     async getProducts() {
-      this.productPage = await this.$services.product.list(this.requestParams);
+      this.page = await this.$services.product.list(this.requestParams);
     },
     async getBrands() {
       this.brandPage = await this.$services.brand.list();

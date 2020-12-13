@@ -11,7 +11,7 @@ function base64Encode(file) {
 exports.initDB = async function (app) {
   try {
 
-    const user = await app.service('admin/users').find({
+    const user = await app.service('login').find({
       query: {
         email: 'admin@admin.com'
       }

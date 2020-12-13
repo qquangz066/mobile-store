@@ -116,7 +116,7 @@
                       :selected="product?.status==='enable'">Enable
               </option>
               <option value="disable"
-                      :selected="product?.brand_id==='disable'">Disable
+                      :selected="product?.status==='disable'">Disable
               </option>
             </select>
             <p class="text-danger" v-if="errors.status">
@@ -169,6 +169,14 @@
           <div class="text-right">
             <button @click="onSubmit" type="button" class="btn btn-success">Save</button>
             <button @click="$router.push({name: 'AdminProductList'})" type="button" class="btn btn-danger">Back</button>
+          </div>
+          <div v-if="form.submitted" class="text-right mt-4">
+            <div class="alert alert-success d-inline-block">
+              Saved successfully.
+              <button @click="()=>form.submitted=false" type="button" class="close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
           </div>
 
         </div>
@@ -228,7 +236,8 @@ export default {
         },
         offer: {
           name: ''
-        }
+        },
+        submitted: false
       }
     }
   },
@@ -238,6 +247,7 @@ export default {
           .then(async () => {
             this.errors = {};
             this.product = await this.$services.admin.product.update(this.$route.params.id, this.product)
+            this.form.submitted = true
           })
           .catch(err => {
             err?.inner?.forEach(error => {

@@ -1,5 +1,5 @@
-const { Service } = require('feathers-mongoose');
+const {AdminService} = require('../admin_service');
 
-exports.AdminBrands = class AdminBrands extends Service {
-  
+exports.AdminBrands = class AdminBrands extends AdminService {
+
 };

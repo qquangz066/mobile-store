@@ -9,7 +9,7 @@ module.exports = function (app) {
 
     name: { type: String, lowercase: true ,require:true},
     email: { type: String, unique: true, lowercase: true ,require:true },
-    phoneNumber: { type: String},
+    phone_number: { type: String},
     password: { type: String ,require:true },
     role: { type: String},
     status: { type: String,default: 'enable'},

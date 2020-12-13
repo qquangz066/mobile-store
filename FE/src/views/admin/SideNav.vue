@@ -20,10 +20,16 @@
 
             </li>
             <li class="nav-item">
-              <a :class="'nav-link ' + ($route.name==='AdminBrandList'? 'active' : '')" href="javascript:void(0)">
-
+              <router-link :to="{ name: 'AdminBrandList'}"
+                           :class="'nav-link ' + ($route.name==='AdminBrandList'? 'active' : '')">
                 <span class="nav-link-text">Brands</span>
-              </a>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'AdminUserList'}"
+                           :class="'nav-link ' + ($route.name==='AdminUserList'? 'active' : '')">
+                <span class="nav-link-text">Users</span>
+              </router-link>
             </li>
           </ul>
 

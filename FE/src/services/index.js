@@ -3,6 +3,7 @@ import productAdminService from "@/services/admin_product";
 import categoryService from "@/services/category";
 import brandService from "@/services/brand";
 import brandAdminService from "@/services/admin_brand";
+import userAdminService from "@/services/admin_user";
 import auth from "@/services/auth";
 
 export default {
@@ -12,6 +13,7 @@ export default {
     brand: brandService,
     admin: {
         product: productAdminService,
-        brand: brandAdminService
+        brand: brandAdminService,
+        user: userAdminService
     }
 }

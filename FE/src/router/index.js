@@ -36,11 +36,34 @@ const routes = [
                 meta: {requiresAuth: true, roles: ['admin']}
             },
             {
-                path: ':id',
+                path: 'products/:id',
                 name: 'AdminProductDetail',
                 component: () => import( '../components/admin/ProductDetail.vue'),
                 meta: {requiresAuth: true, roles: ['admin']}
-            }
+            },
+            {
+                path: 'brands',
+                name: 'AdminBrandList',
+                component: () => import( '../components/admin/BrandList.vue'),
+                meta: {requiresAuth: true, roles: ['admin']}
+            },
+            {
+                path: 'brands/:id',
+                name: 'AdminBrandDetail',
+                component: () => import( '../components/admin/BrandDetail.vue'),
+                meta: {requiresAuth: true, roles: ['admin']}
+            },
+            {
+                path: 'users',
+                name: 'AdminUserList',
+                component: () => import( '../components/admin/UserList.vue'),
+                meta: {requiresAuth: true, roles: ['admin']}
+            },{
+                path: 'users/:id',
+                name: 'AdminUserDetail',
+                component: () => import( '../components/admin/UserDetail.vue'),
+                meta: {requiresAuth: true, roles: ['admin']}
+            },
         ]
     },
     {

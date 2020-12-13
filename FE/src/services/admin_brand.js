@@ -12,6 +12,11 @@ const brandService = {
             .get(`/admin/brands/${id}`)
             .then(res => res.data);
     },
+    async update(id, brand) {
+        return await $http
+            .put(`/admin/brands/${id}`, {...brand})
+            .then(res => res.data);
+    },
     async delete(id) {
         return await $http
             .delete(`/admin/brands/${id}`)

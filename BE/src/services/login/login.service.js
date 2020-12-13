@@ -1,7 +1,7 @@
-// Initializes the `admin_users` service on path `/admin/users`
-const {AdminUsers} = require('./admin_users.class');
+// Initializes the `login` service on path `/login`
+const {Login} = require('./login.class');
 const {getUsersModel} = require('../users/users.service.js');
-const hooks = require('./admin_users.hooks');
+const hooks = require('./login.hooks');
 
 module.exports = function (app) {
   const options = {
@@ -10,10 +10,10 @@ module.exports = function (app) {
   };
 
   // Initialize our service with any options it requires
-  app.use('/admin/users', new AdminUsers(options, app));
+  app.use('/login', new Login(options, app));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service('admin/users');
+  const service = app.service('login');
 
   service.hooks(hooks);
 };

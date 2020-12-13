@@ -5,7 +5,7 @@
         <div class=" card-header border-0">
           <div class="row align-items-center">
             <div class="col-lg-6 col-7">
-              <h6 class="h2 d-inline-block mb-0">Products</h6>
+              <h6 class="h2 d-inline-block mb-0">Brands</h6>
             </div>
             <div class="col-lg-6 col-5 text-right">
               <a href="#" class="btn btn-sm btn-neutral">New</a>
@@ -19,30 +19,22 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
             <tr>
-              <th scope="col">Image</th>
               <th scope="col">Name<i class="fas fa-sort text-right"/></th>
-              <th scope="col">Brand<i class="fas fa-sort text-right"/></th>
-              <th scope="col">Quality<i class="fas fa-sort text-right"/></th>
+              <th scope="col">Text<i class="fas fa-sort text-right"/></th>
               <th scope="col">Status<i class="fas fa-sort text-right"/></th>
               <th scope="col"></th>
             </tr>
             </thead>
             <tbody class="list">
-            <tr v-for="(product, index) in products" :key="index">
+            <tr v-for="(brand, index) in brands" :key="index">
               <td>
-                <img style="width: auto; height: 100px" :src="product.image">
-              </td>
-              <td class="budget">
-                {{ product.name }}
+                {{ brand.name }}
               </td>
               <td>
-                {{ product.brand?.name }}
+                {{ brand.text }}
               </td>
               <td>
-                {{ product.quality }}
-              </td>
-              <td>
-                {{ product.status }}
+                {{ brand.status }}
               </td>
               <td class="text-right">
                 <div class="dropdown">
@@ -51,10 +43,10 @@
                     <i class="fas fa-ellipsis-v"></i>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                    <router-link :to="{ name: 'AdminProductDetail', params: { id: product._id }}"
+                    <router-link :to="{ name: 'AdminBrandDetail', params: { id: brand._id }}"
                                  class="dropdown-item">Edit
                     </router-link>
-                    <button class="dropdown-item" @click="deleteProduct(product._id)">Delete</button>
+                    <button class="dropdown-item" @click="deleteBrand(brand._id)">Delete</button>
 
                   </div>
                 </div>
@@ -80,11 +72,11 @@
 
 <script>
 import Pagination from "@/components/Pagination";
-import ListProduct from "@/mixins/page";
+import ListBrand from "@/mixins/page";
 
 export default {
-  name: "AdminProductList",
-  mixins: [ListProduct],
+  name: "AdminBrandList",
+  mixins: [ListBrand],
   components: {
     Pagination,
   },
@@ -93,54 +85,50 @@ export default {
       page: {
         data: [],
         skip: 0,
-        limit: 6,
+        limit: 10,
         total: 0
       }
     }
   },
   watch: {
     activePage() {
-      if (this.$route.name !== 'AdminProductList' || !this.isValidPage) {
+      if (this.$route.name !== 'AdminBrandList' || !this.isValidPage) {
         return
       }
-      this.getProducts();
+      this.getBrands();
     }
   },
   computed: {
     requestParams() {
-      return {
-        ...this.getLimitAndSkip(),
-        '$populate[0]': 'brand',
-        '$populate[1]': 'category'
-      }
+      return this.getLimitAndSkip()
     },
-    products() {
+    brands(){
       return this.page.data
     }
   },
 
   methods: {
-    async getProducts() {
-      this.page = await this.$services.admin.product.list(this.requestParams);
+    async getBrands() {
+      this.page = await this.$services.admin.brand.list(this.requestParams);
     },
     onPageChange(page) {
       if (page !== this.activePage) {
         this.$router.push({
-          name: 'AdminProductList',
+          name: 'AdminBrandList',
           query: {
             page: page
           }
         });
       }
     },
-    async deleteProduct(id) {
-      await this.$services.admin.product.delete(id);
-      await this.getProducts();
+    async deleteBrand(id) {
+      await this.$services.admin.brand.delete(id);
+      await this.getBrands();
     }
   },
 
   created() {
-    this.getProducts();
+    this.getBrands();
   },
 }
 </script>
