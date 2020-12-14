@@ -2,7 +2,12 @@ import {HOME_SEARCH} from "../actions.type";
 import {SET_SEARCH} from "../mutations.type";
 
 const initialState = {
-    search: ''
+    search: '',
+    cart: [
+        {
+
+        }
+    ]
 };
 
 const state = {...initialState};

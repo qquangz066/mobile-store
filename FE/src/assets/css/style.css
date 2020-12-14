@@ -268,13 +268,6 @@ button.w3view-cart {
     color: #000;
 }
 
-.navbar-light .navbar-nav .show > .nav-link,
-.navbar-light .navbar-nav .active > .nav-link,
-.navbar-light .navbar-nav .nav-link.show,
-.navbar-light .navbar-nav .nav-link.active {
-    color: #F45C5D;
-}
-
 /*-- navigation-dropdown --*/
 
 .agile_inner_drop_nav_info {
@@ -2638,11 +2631,6 @@ div#testimonials h4.m-title {
 
     .welcome-left h4 {
         font-size: 16px;
-    }
-
-    /* checkout */
-    .quantity {
-        width: 77px;
     }
 
     .checkout-right h4 {

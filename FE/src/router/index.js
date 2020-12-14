@@ -1,9 +1,9 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import Home from '../views/home/Home.vue';
-import ProductDetail from "@/components/home/ProductDetail";
-import ProductList from "@/components/home/ProductList";
+import ProductDetail from "@/components/home/product/ProductDetail";
+import ProductList from "@/components/home/product/ProductList";
 import store from '@/store';
-import Orders from "@/components/home/Orders";
+import Cart from "@/components/home/order/Cart";
 
 const routes = [
     {
@@ -23,9 +23,9 @@ const routes = [
                 component: ProductDetail
             },
             {
-                path: '/orders',
-                name: 'Orders',
-                component: Orders
+                path: '/cart',
+                name: 'Cart',
+                component: Cart
             }
         ]
     },
@@ -39,48 +39,48 @@ const routes = [
                 alias: '',
                 path: 'products',
                 name: 'AdminProductList',
-                component: () => import( '../components/admin/ProductList.vue'),
+                component: () => import( '../components/admin/product/ProductList.vue'),
                 meta: {requiresAuth: true, roles: ['admin']}
             },
             {
                 path: 'products/:id',
                 name: 'AdminProductDetail',
-                component: () => import( '../components/admin/ProductDetail.vue'),
+                component: () => import( '../components/admin/product/ProductDetail.vue'),
                 meta: {requiresAuth: true, roles: ['admin']}
             },
             {
                 path: 'products/create',
                 name: 'AdminProductCreation',
-                component: () => import( '../components/admin/ProductCreation.vue'),
+                component: () => import( '../components/admin/product/ProductCreation.vue'),
                 meta: {requiresAuth: true, roles: ['admin']}
             },
             {
                 path: 'brands',
                 name: 'AdminBrandList',
-                component: () => import( '../components/admin/BrandList.vue'),
+                component: () => import( '../components/admin/brand/BrandList.vue'),
                 meta: {requiresAuth: true, roles: ['admin']}
             },
             {
                 path: 'brands/:id',
                 name: 'AdminBrandDetail',
-                component: () => import( '../components/admin/BrandDetail.vue'),
+                component: () => import( '../components/admin/brand/BrandDetail.vue'),
                 meta: {requiresAuth: true, roles: ['admin']}
             },
             {
                 path: 'brands/create',
                 name: 'AdminBrandCreation',
-                component: () => import( '../components/admin/BrandCreation.vue'),
+                component: () => import( '../components/admin/brand/BrandCreation.vue'),
                 meta: {requiresAuth: true, roles: ['admin']}
             },
             {
                 path: 'users',
                 name: 'AdminUserList',
-                component: () => import( '../components/admin/UserList.vue'),
+                component: () => import( '../components/admin/user/UserList.vue'),
                 meta: {requiresAuth: true, roles: ['admin']}
             }, {
                 path: 'users/:id',
                 name: 'AdminUserDetail',
-                component: () => import( '../components/admin/UserDetail.vue'),
+                component: () => import( '../components/admin/user/UserDetail.vue'),
                 meta: {requiresAuth: true, roles: ['admin']}
             },
         ]

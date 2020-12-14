@@ -180,11 +180,11 @@
         </div>
         <!-- //logo -->
         <!-- header-bot -->
-        <div class="col-md-9 header mt-4 mb-md-0 mb-4">
+        <div class="col-md-9 header mt-auto mb-auto">
           <div class="row">
             <!-- search -->
             <div class="col-10 agileits_search">
-              <div class="form-inline">
+              <div class="form-inline h-100 m-auto">
                 <input
                     class="form-control mr-sm-2"
                     type="search"
@@ -201,10 +201,12 @@
             <!-- //search -->
             <!-- cart details -->
             <div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
-              <div class="wthreecartaits wthreecartaits2 cart cart box_1">
-                <button class="btn w3view-cart">
-                  <i class="fas fa-cart-arrow-down"></i>
-                </button>
+              <div id="cart">
+                <span @click="showCart" class="p1 fa-stack fa-2x has-badge"
+                      :data-count="$store.state.home.cart.length"
+                      style="cursor: pointer">
+                  <i class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
+                </span>
               </div>
             </div>
             <!-- //cart details -->
@@ -213,38 +215,6 @@
       </div>
     </div>
   </div>
-  <!-- shop locator (popup) -->
-  <!-- //header-bottom -->
-  <!-- navigation -->
-  <div class="navbar-inner" style="background-color: #FED101">
-    <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-light" style="padding: 0">
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav text-center mr-xl-5">
-            <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-              <a class="nav-link" href="index.html">Điện thoại</a>
-            </li>
-            <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-              <a class="nav-link" href="index.html">Phụ kiện</a>
-            </li>
-
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </div>
-  <!-- //navigation -->
 
   <!-- banner-2 -->
   <div class="page-head_agile_info_w3l"></div>
@@ -272,10 +242,29 @@ export default {
     },
     onSearch() {
       this.$store.dispatch(HOME_SEARCH, this.search);
+    },
+    showCart() {
+      if (this.$store.state.home.cart.length > 0) {
+        this.$router.push({name: 'Cart'})
+      }
     }
   }
 };
 </script>
 
 <style scoped>
+#cart .p1[data-count]:after {
+  position: absolute;
+  right: 10%;
+  top: 8%;
+  content: attr(data-count);
+  font-size: 40%;
+  padding: .2em;
+  border-radius: 50%;
+  line-height: 1em;
+  color: white;
+  background: rgba(255, 0, 0, .85);
+  text-align: center;
+  min-width: 1em;
+}
 </style>
