@@ -9,7 +9,7 @@
       </div>
       <div class="navbar-inner">
         <!-- Collapse -->
-        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <div class="collapse navbar-collapse pb-4" id="sidenav-collapse-main">
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">

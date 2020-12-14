@@ -8,8 +8,8 @@
               <h6 class="h2 d-inline-block mb-0">Users</h6>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+<!--              <a href="#" class="btn btn-sm btn-neutral">New</a>-->
+<!--              <a href="#" class="btn btn-sm btn-neutral">Filters</a>-->
             </div>
           </div>
         </div>

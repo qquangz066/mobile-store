@@ -3,15 +3,17 @@ import Home from '../views/home/Home.vue';
 import ProductDetail from "@/components/home/ProductDetail";
 import ProductList from "@/components/home/ProductList";
 import store from '@/store';
+import Orders from "@/components/home/Orders";
 
 const routes = [
     {
-        path: '/products',
+        path: '/',
         name: 'Home',
         component: Home,
         children: [
             {
-                path: '',
+                alias: '',
+                path: '/products',
                 name: 'ProductList',
                 component: ProductList
             },
@@ -19,6 +21,11 @@ const routes = [
                 path: ':id',
                 name: 'ProductDetail',
                 component: ProductDetail
+            },
+            {
+                path: '/orders',
+                name: 'Orders',
+                component: Orders
             }
         ]
     },
@@ -42,6 +49,12 @@ const routes = [
                 meta: {requiresAuth: true, roles: ['admin']}
             },
             {
+                path: 'products/create',
+                name: 'AdminProductCreation',
+                component: () => import( '../components/admin/ProductCreation.vue'),
+                meta: {requiresAuth: true, roles: ['admin']}
+            },
+            {
                 path: 'brands',
                 name: 'AdminBrandList',
                 component: () => import( '../components/admin/BrandList.vue'),
@@ -54,11 +67,17 @@ const routes = [
                 meta: {requiresAuth: true, roles: ['admin']}
             },
             {
+                path: 'brands/create',
+                name: 'AdminBrandCreation',
+                component: () => import( '../components/admin/BrandCreation.vue'),
+                meta: {requiresAuth: true, roles: ['admin']}
+            },
+            {
                 path: 'users',
                 name: 'AdminUserList',
                 component: () => import( '../components/admin/UserList.vue'),
                 meta: {requiresAuth: true, roles: ['admin']}
-            },{
+            }, {
                 path: 'users/:id',
                 name: 'AdminUserDetail',
                 component: () => import( '../components/admin/UserDetail.vue'),

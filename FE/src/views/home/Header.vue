@@ -24,10 +24,11 @@
                   <i class="ni ni-settings-gear-65"></i>
                   <span>Settings</span>
                 </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-calendar-grid-58"></i>
-                  <span>Activity</span>
-                </a>
+                <router-link :to="{ name: 'AdminProductList'}"
+                             class="dropdown-item">
+                  <i class="ni ni-single-02"></i>
+                  <span class="ni ni-calendar-grid-58">Admin page</span>
+                </router-link>
                 <div class="dropdown-divider"></div>
                 <button class="dropdown-item" @click="logout" style="cursor: pointer">
                   <i class="ni ni-user-run"></i>
@@ -183,16 +184,19 @@
           <div class="row">
             <!-- search -->
             <div class="col-10 agileits_search">
-              <form class="form-inline" action="#" method="post">
+              <div class="form-inline">
                 <input
                     class="form-control mr-sm-2"
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
+                    v-model="search"
                     required
+                    @keyup.enter="onSearch"
                 />
-                <button class="btn my-2 my-sm-0" type="submit">Search</button>
-              </form>
+                <button @click="onSearch" class="btn my-2 my-sm-0" type="submit">Search
+                </button>
+              </div>
             </div>
             <!-- //search -->
             <!-- cart details -->
@@ -249,17 +253,25 @@
 <script>
 import Login from "@/components/Login";
 import {mapGetters} from "vuex";
-import {LOGOUT} from '@/store/actions.type';
+import {HOME_SEARCH, LOGOUT} from '@/store/actions.type';
 
 export default {
   name: "Header",
   components: {Login},
+  data() {
+    return {
+      search: this.$store.state.home.search
+    }
+  },
   computed: {
-    ...mapGetters(['auth'])
+    ...mapGetters(['auth']),
   },
   methods: {
     logout() {
       this.$store.dispatch(LOGOUT);
+    },
+    onSearch() {
+      this.$store.dispatch(HOME_SEARCH, this.search);
     }
   }
 };

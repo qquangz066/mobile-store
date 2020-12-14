@@ -1,4 +1,4 @@
-const {protect} = require('@feathersjs/authentication-local').hooks;
+const {protect, hashPassword} = require('@feathersjs/authentication-local').hooks;
 
 const {disallow} = require('feathers-hooks-common');
 
@@ -7,7 +7,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [disallow()],
+    create: [disallow('socketio', 'primus', 'rest'), hashPassword('password')],
     update: [disallow()],
     patch: [disallow()],
     remove: [disallow()]

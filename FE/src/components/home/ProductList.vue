@@ -168,6 +168,11 @@ export default {
     }
   },
   watch: {
+    async '$store.state.home.search'() {
+      this.checkedBrands.length = 0
+      await this.resetState()
+      await this.getProducts()
+    },
     activePage() {
       if (this.$route.name !== 'ProductList' || !this.isValidPage) {
         return
@@ -175,14 +180,18 @@ export default {
       this.getProducts();
       document.getElementById('product-section').scrollIntoView({behavior: 'smooth'});
     },
-    async checkedBrands() {
-      await this.$router.replace({'query': null});
-      this.page = await this.$services.product.list(this.requestParams);
+    checkedBrands: {
+      async handler() {
+        await this.$router.replace({'query': null});
+        this.page = await this.$services.product.list(this.requestParams);
+      }
     }
   },
   computed: {
     requestParams() {
-      return {...this.getLimitAndSkip(), ['brand_id[$in]']: this.checkedBrands}
+      let searchParam = this.$store.state.home.search ? {'name[$search]': this.$store.state.home.search} : {}
+
+      return {...this.getLimitAndSkip(), 'brand_id[$in]': this.checkedBrands, ...searchParam}
     },
     products() {
       if (this.page.data === undefined) {
@@ -202,8 +211,8 @@ export default {
   },
 
   methods: {
-    async getProducts() {
-      this.page = await this.$services.product.list(this.requestParams);
+    async getProducts(params = {}) {
+      this.page = await this.$services.product.list({...this.requestParams, ...params});
     },
     async getBrands() {
       this.brandPage = await this.$services.brand.list();
@@ -221,6 +230,7 @@ export default {
   },
 
   created() {
+    console.log('created')
     this.getBrands();
     this.getProducts();
   },

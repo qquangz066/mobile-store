@@ -8,8 +8,9 @@
               <h6 class="h2 d-inline-block mb-0">Brands</h6>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+              <router-link :to="{ name: 'AdminBrandCreation'}"
+                           class="btn btn-sm btn-neutral">New
+              </router-link>
             </div>
           </div>
         </div>
@@ -102,7 +103,7 @@ export default {
     requestParams() {
       return this.getLimitAndSkip()
     },
-    brands(){
+    brands() {
       return this.page.data
     }
   },

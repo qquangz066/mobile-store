@@ -19,7 +19,7 @@ exports.initDB = async function (app) {
 
     if (user.total === 0) {
       // init users
-      app.service('admin/users').create(
+      app.service('login').create(
         {
           name: 'admin',
           email: 'admin@admin.com',

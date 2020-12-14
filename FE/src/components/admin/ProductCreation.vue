@@ -1,11 +1,11 @@
 <template>
-<div class="row">
+  <div class="row">
     <div class="col">
       <div class="card">
         <div class=" card-header border-0">
           <div class="row align-items-center">
             <div class="col-lg-6 col-7">
-              <h6 class="h2 d-inline-block mb-0">Product Detail</h6>
+              <h6 class="h2 d-inline-block mb-0">Create product</h6>
             </div>
           </div>
         </div>
@@ -48,6 +48,13 @@
             <p class="text-danger" v-if="errors.specs">
               {{ errors.specs }}
             </p>
+            <p class="text-danger" v-if="errors['specs[0].name']">
+              Key is invalid
+            </p>
+            <p class="text-danger" v-if="errors['specs[0].value']">
+              Value is invalid
+            </p>
+
             <div class="row mt-3 ml-4">
               <div class="col-4 ">
                 <label>Key</label>
@@ -178,7 +185,6 @@
               </button>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -191,9 +197,10 @@ import * as yup from "yup";
 const schema = yup.object({
   name: yup.string().required(),
   brand_id: yup.string().required(),
+  category_id: yup.string().required(),
   specs: yup.array(yup.object({
-    name: yup.string().required(),
-    value: yup.string().required()
+    name: yup.string().trim().min(3).required(),
+    value: yup.string().trim().min(1).required()
   })).min(1),
   offers: yup.array(yup.object({
     name: yup.string().required()
@@ -206,29 +213,30 @@ const schema = yup.object({
   status: yup.string().matches(/(enable|disable)/)
 });
 
+const initialState = {
+  name: '',
+  brand_id: '',
+  category_id: '',
+  specs: [],
+  offers: [],
+  image: '',
+  gallery: [],
+  price: 0,
+  old_price: 0,
+  quality: 0,
+  status: 'enable',
+}
+
 export default {
   name: "AdminProductDetail",
   data() {
     return {
       errors: {},
       product: {
-        name: '',
-        brand_id: '',
-        specs: [
-          {
-            name: '',
-            value: ''
-          }
-        ],
-        offers: [],
-        image: '',
-        gallery: [],
-        price: 0,
-        old_price: 0,
-        quality: 0,
-        status: 'enable',
+        initialState
       },
       brands: {},
+      categories: [],
       form: {
         specs: {
           name: '',
@@ -243,23 +251,27 @@ export default {
   },
   methods: {
     onSubmit() {
+      //setting default category
+      this.product.category_id = this.categories.find(item => item.name === 'phone')._id
       schema.validate({...this.product}, {abortEarly: false})
           .then(async () => {
             this.errors = {};
-            this.product = await this.$services.admin.product.update(this.$route.params.id, this.product)
+            await this.$services.admin.product.create(this.product)
+            this.product = {...initialState}
             this.form.submitted = true
           })
           .catch(err => {
+            this.errors = {};
             err?.inner?.forEach(error => {
               this.errors[error.path] = error.message;
             });
           });
     },
-    async getProduct() {
-      this.product = await this.$services.admin.product.get(this.$route.params.id)
-    },
     async getBrands() {
       this.brands = await this.$services.admin.brand.list({$limit: 1000}).then(res => res.data)
+    },
+    async getCategories() {
+      this.categories = await this.$services.admin.category.list({$limit: 1000}).then(res => res.data)
     },
     addSpecs() {
       if (this.product.specs.filter(item => item.name === this.form.specs.name).length === 0) {
@@ -312,8 +324,8 @@ export default {
   },
 
   created() {
-    this.getProduct();
     this.getBrands();
+    this.getCategories();
   },
 
 }

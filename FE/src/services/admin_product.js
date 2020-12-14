@@ -16,6 +16,11 @@ const productService = {
             .get(`/admin/products/${id}`, {params: defaultParams})
             .then(res => res.data);
     },
+    async create(product) {
+        return await $http
+            .post(`/admin/products`, {...product})
+            .then(res => res.data);
+    },
     async update(id, product) {
         return await $http
             .put(`/admin/products/${id}`, {...product})

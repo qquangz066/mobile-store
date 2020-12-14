@@ -70,7 +70,7 @@
 <script>
 export default {
   name: "Pagination",
-  emits:["pageChanged"],
+  emits:["page-changed"],
   props: {
     maxVisibleButtons: {
       type: Number,

@@ -1,12 +1,14 @@
+const initialPageState = {
+    data: [],
+    skip: 0,
+    limit: 6,
+    total: 0
+}
+
 export default {
     data() {
         return {
-            page: {
-                data: [],
-                skip: 0,
-                limit: 6,
-                total: 0
-            }
+            page: initialPageState
         };
     },
     computed: {
@@ -24,6 +26,10 @@ export default {
         }
     },
     methods: {
+        async resetState() {
+            await this.$router.replace({'query': null});
+            this.page = {...initialPageState}
+        },
         getLimitAndSkip() {
             let offset = (this.activePage - 1) * this.page.limit;
             if (this.page.total && offset > this.page.total) {

@@ -1,32 +1,32 @@
 import {$http} from "@/http";
 
 
-const brandService = {
+const categoryService = {
     async list(params) {
         return await $http
-            .get('/admin/brands', {params: params})
+            .get('/admin/categories', {params: params})
             .then(res => res.data);
     },
     async get(id) {
         return await $http
-            .get(`/admin/brands/${id}`)
+            .get(`/admin/categories/${id}`)
             .then(res => res.data);
     },
-    async create(brand) {
+    async create(category) {
         return await $http
-            .post(`/admin/brands`, {...brand})
+            .post(`/admin/categories`, {...category})
             .then(res => res.data);
     },
-    async update(id, brand) {
+    async update(id, category) {
         return await $http
-            .put(`/admin/brands/${id}`, {...brand})
+            .put(`/admin/categories/${id}`, {...category})
             .then(res => res.data);
     },
     async delete(id) {
         return await $http
-            .delete(`/admin/brands/${id}`)
+            .delete(`/admin/categories/${id}`)
             .then(res => res.data);
     },
 };
 
-export default brandService;
+export default categoryService;
