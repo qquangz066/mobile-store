@@ -7,6 +7,7 @@ const adminCategories = require('./admin_categories/admin_categories.service.js'
 const adminProducts = require('./admin_products/admin_products.service.js');
 const adminUsers = require('./admin_users/admin_users.service.js');
 const login = require('./login/login.service.js');
+const orders = require('./orders/orders.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -18,4 +19,5 @@ module.exports = function (app) {
   app.configure(adminProducts);
   app.configure(adminUsers);
   app.configure(login);
+  app.configure(orders);
 };

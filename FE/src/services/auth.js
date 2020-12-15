@@ -1,13 +1,18 @@
-import {$http} from "@/http";
+import {$axios} from "@/http";
 import router from "@/router";
 
 let localStorage = global.window.localStorage;
 
 export default {
+    register(user) {
+        return $axios
+            .post('/users', user)
+            .then(res => res.data);
+    },
     login(email, password) {
         if (this.loggedIn()) return this.getAuth();
 
-        return $http
+        return $axios
             .post('/authentication', {
                 "strategy": "local",
                 "email": email,

@@ -5,112 +5,88 @@
       <section class="shopping-cart dark">
         <div class="container">
           <div class="content">
-            <div class="row">
-              <div class="col-md-12 col-lg-8">
-                <div class="items">
-                  <div class="product">
-                    <div class="row">
-                      <div class="col-md-3">
-                        <img class="img-fluid mx-auto d-block image" src="./image.jpg">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="info">
-                          <div class="row">
-                            <div class="col-md-5 product-name">
-                              <div class="product-name">
-                                <a href="#">Lorem Ipsum dolor</a>
-                                <div class="product-info">
-                                  <div>Display: <span>5 inch</span></div>
-                                  <div>RAM: <span>4GB</span></div>
-                                  <div>Memory: <span>32GB</span></div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-4 quantity">
-                              <label>Quantity:</label>
-                              <input type="number" value="1" min="1" class="form-control quantity-input">
-                            </div>
-                            <div class="col-md-3 price">
-                              <span>$120</span>
-                            </div>
+            <div class="items">
+              <div class="product" v-for="(item,index) in carts" :key="index">
+                <div class="row">
+                  <div class="col-2">
+                    <img class="img-fluid mx-auto d-block image" :src="item.product.image">
+                  </div>
+                  <div class="col-10">
+                    <div class="info">
+                      <div class="row">
+                        <div class="col-4 product-name">
+                          <div class="product-name">
+                            <a href="#">{{ item.product.name }}</a>
                           </div>
+                        </div>
+                        <div class="col-3 quantity">
+                          <label>Quantity:</label>
+                          <input
+                              @input="$store.dispatch('SET_CART_QUALITY',{...item,quality:parseInt($event.target.value)})"
+                              type="number"
+                              :value="item.quality" min="1" class="form-control quantity-input">
+                        </div>
+                        <div class="col-3 price ">
+                          <span>{{ $money(item.product.price) }}</span>
+                        </div>
+                        <div class="col-1 price">
+                          <button @click="$store.dispatch('DELETE_FROM_CART',item)" class="btn btn-danger"
+                                  style="cursor: pointer">delete
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="product">
-                    <div class="row">
-                      <div class="col-md-3">
-                        <img class="img-fluid mx-auto d-block image" src="./image.jpg">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="info">
-                          <div class="row">
-                            <div class="col-md-5 product-name">
-                              <div class="product-name">
-                                <a href="#">Lorem Ipsum dolor</a>
-                                <div class="product-info">
-                                  <div>Display: <span>5 inch</span></div>
-                                  <div>RAM: <span>4GB</span></div>
-                                  <div>Memory: <span>32GB</span></div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-4 quantity">
-                              <label>Quantity:</label>
-                              <input type="number" value="1" min="1" class="form-control quantity-input">
-                            </div>
-                            <div class="col-md-3 price">
-                              <span>$120</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product">
-                    <div class="row">
-                      <div class="col-md-3">
-                        <img class="img-fluid mx-auto d-block image" src="./image.jpg">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="info text-center">
-                          <div class="row">
-                            <div class="col-md-5 product-name">
-                              <div class="product-name">
-                                <a href="#">Lorem Ipsum dolor</a>
-                                <div class="product-info">
-                                  <div>Display: <span>5 inch</span></div>
-                                  <div>RAM: <span>4GB</span></div>
-                                  <div>Memory: <span>32GB</span></div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-4 quantity">
-                              <label>Quantity:</label>
-                              <input type="number" value="1" min="1" class="form-control quantity-input">
-                            </div>
-                            <div class="col-md-3 price">
-                              <span>$120</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12 col-lg-4">
-                <div class="summary">
-                  <h3>Summary</h3>
-                  <div class="summary-item"><span class="text">Subtotal</span><span class="price">$360</span></div>
-                  <div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div>
-                  <div class="summary-item"><span class="text">Shipping</span><span class="price">$0</span></div>
-                  <div class="summary-item"><span class="text">Total</span><span class="price">$360</span></div>
-                  <button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
                 </div>
               </div>
             </div>
+            <div v-if="carts.length>0" class="modal-body">
+              <div class="form-group">
+                <label class="col-form-label">Name</label>
+                <input
+                    v-model="form.name"
+                    :class="[ 'form-control', errors.name && 'is-invalid' ]"
+                    type="text"
+                    class="form-control"
+                />
+                <p class="text-danger" v-if="errors.name">
+                  {{ errors.name }}
+                </p>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Phone</label>
+                <input
+                    v-model="form.phone_number"
+                    :class="[ 'form-control', errors.phone_number && 'is-invalid' ]"
+                    type="email"
+                    class="form-control"
+                />
+                <p class="text-danger" v-if="errors.phone_number">
+                  {{ errors.phone_number }}
+                </p>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Address</label>
+                <input
+                    v-model="form.address"
+                    :class="[ 'form-control', errors.address && 'is-invalid' ]"
+                    type="password"
+                    class="form-control"
+                />
+                <p class="text-danger" v-if="errors.address">
+                  {{ errors.address }}
+                </p>
+              </div>
+              <div class="summary">
+                <h3>Summary</h3>
+                <div class="summary-item"><span class="text">Discount</span><span class="price">0đ</span></div>
+                <div class="summary-item"><span class="text">Shipping</span><span class="price">0đ</span></div>
+                <div class="summary-item"><span class="text">Total</span><span class="price">{{ $money(total) }}</span>
+                </div>
+                <button @click="checkOut" type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -121,10 +97,57 @@
 
 <script>
 import OrderLayout from "@/components/home/order/OrderLayout";
+import {mapState} from "vuex";
+import {CHECK_OUT} from "@/store/actions.type";
+import * as yup from "yup";
+
+const schema = yup.object({
+  name: yup.string().required(),
+  phone_number: yup.string().required(),
+  address: yup.string().required()
+});
 
 export default {
   name: "Cart",
-  components: {OrderLayout}
+  components: {OrderLayout},
+  data() {
+    return {
+      errors: {},
+      form: {
+        name: this.$store.state.auth?.auth?.user?.name,
+        phone_number: this.$store.state.auth?.auth?.user?.phone_number,
+        address: '',
+      }
+    }
+  },
+  computed: {
+    total() {
+      return this.carts
+          .map(item => item.product.price * item.quality)
+          .reduce((prev, curr) => prev + curr, 0)
+    },
+    ...mapState({
+      carts: state => state.home.carts,
+    })
+  },
+  methods: {
+    checkOut() {
+      schema.validate({...this.form}, {abortEarly: false})
+          .then(async () => {
+            this.errors = {};
+            const result = await this.$store.dispatch(CHECK_OUT, {...this.form, total: this.total, detail: this.carts})
+            if (result) {
+              this.$toast('Oder successfully. We will contact you soon!')
+            }
+          })
+          .catch(err => {
+            err?.inner?.forEach(error => {
+              this.errors[error.path] = error.message;
+            });
+          });
+
+    }
+  }
 }
 </script>
 

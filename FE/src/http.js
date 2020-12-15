@@ -3,6 +3,7 @@ import constants from "./constants";
 import auth from "@/services/auth";
 import store from "@/store";
 import {LOGOUT} from "@/store/actions.type";
+import {useToast} from "vue-toastification";
 
 let config = {
     baseURL: constants.host,
@@ -10,9 +11,15 @@ let config = {
 };
 
 const $http = axios.create(config);
+const toast = useToast();
 
 $http.interceptors.request.use(
     function (config) {
+        if (!store.state?.auth?.auth?.user) {
+            toast.warning('You need to login to continue this action!')
+            return Promise.reject('You need to login to continue this action!');
+        }
+
         const token = auth.getAuth() && auth.getAuth().accessToken;
         if (token) {
             config.headers = {Authorization: `Bearer ${token}`};
@@ -36,6 +43,8 @@ $http.interceptors.response.use(
         if (error.response && error.response.status === 401) {
             await store.dispatch(LOGOUT)
         }
+
+        toast.error('Something went wrong!')
         return Promise.reject(error);
     }
 );

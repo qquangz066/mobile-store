@@ -118,13 +118,13 @@
                         <a href="single.html">{{ product.name }}</a>
                       </h4>
                       <div class="info-product-price my-2">
-                        <span class="item_price">{{ product.price }}đ</span>
-                        <del>{{ product.old_price }}đ</del>
+                        <span class="item_price">{{ $money(product.price) }}</span>
+                        <del>{{ $money(product.old_price) }}</del>
                       </div>
                       <div
                           class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out"
                       >
-                        <button class="btn-primary">Add to cart</button>
+                        <button @click="addToCart(product)" class="btn-primary">Add to cart</button>
                       </div>
                     </div>
                   </div>
@@ -148,6 +148,9 @@
 <script>
 import Pagination from "@/components/Pagination";
 import ListProduct from "@/mixins/page";
+import {ADD_TO_CART} from "@/store/actions.type";
+import {POSITION} from "vue-toastification";
+
 
 export default {
   name: "ProductList",
@@ -211,6 +214,10 @@ export default {
   },
 
   methods: {
+    async addToCart(product) {
+      await this.$store.dispatch(ADD_TO_CART, {product, quality: 1})
+      this.$toast.success("Added to cart", {timeout: 3000, position: POSITION.TOP_CENTER});
+    },
     async getProducts(params = {}) {
       this.page = await this.$services.product.list({...this.requestParams, ...params});
     },

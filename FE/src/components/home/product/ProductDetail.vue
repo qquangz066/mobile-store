@@ -26,8 +26,8 @@
         <div class="col-lg-6 single-right-left simpleCart_shelfItem">
           <h3 class="mb-3">{{ data.name }}</h3>
           <p class="mb-3">
-            <span class="item_price">{{ data.price }}đ</span>
-            <del class="mx-2 font-weight-light">{{ data.old_price }}đ</del>
+            <span class="item_price">{{ $money(data.price) }}</span>
+            <del class="mx-2 font-weight-light">{{ $money(data.old_price) }}</del>
           </p>
           <div class="single-infoagile">
             <ul>
@@ -48,7 +48,7 @@
           </div>
           <div class="occasion-cart mt-5">
             <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-              <button class="btn-primary">Add to cart</button>
+              <button @click="addToCart(data)" class="btn-primary">Add to cart</button>
             </div>
           </div>
         </div>
@@ -59,6 +59,10 @@
 
 <script>
 
+import {ADD_TO_CART} from "@/store/actions.type";
+import {POSITION} from "vue-toastification";
+
+
 export default {
   name: "ProductDetail",
   data() {
@@ -67,6 +71,10 @@ export default {
     }
   },
   methods: {
+    async addToCart(product) {
+      await this.$store.dispatch(ADD_TO_CART, {product, quality: 1})
+      this.$toast.success("Added to cart", {timeout: 3000, position: POSITION.TOP_CENTER});
+    },
     async getProduct() {
       this.data = await this.$services.product.get(this.$route.params.id).catch(
           err => {

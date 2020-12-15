@@ -4,6 +4,7 @@ import ProductDetail from "@/components/home/product/ProductDetail";
 import ProductList from "@/components/home/product/ProductList";
 import store from '@/store';
 import Cart from "@/components/home/order/Cart";
+import {useToast} from "vue-toastification";
 
 const routes = [
     {
@@ -25,7 +26,8 @@ const routes = [
             {
                 path: '/cart',
                 name: 'Cart',
-                component: Cart
+                component: Cart,
+                meta: {requiresAuth: true},
             }
         ]
     },
@@ -96,6 +98,8 @@ const router = createRouter({
     routes
 });
 
+const toast = useToast();
+
 router.beforeEach(async (to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!store.state?.auth?.auth?.user) {
@@ -103,6 +107,7 @@ router.beforeEach(async (to, from, next) => {
                 path: '/',
                 // query: { redirect: to.fullPath }
             })
+            toast.warning('You need to login to continue this action!')
         } else {
             if (to.matched.some(record => record.meta.roles
                 && !(record.meta.roles.includes(store.state?.auth?.auth?.user?.role)))) {

@@ -112,53 +112,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="#" method="post">
-            <div class="form-group">
-              <label class="col-form-label">Tên</label>
-              <input
-                  type="text"
-                  class="form-control"
-                  placeholder=" "
-                  name="Name"
-                  required=""
-              />
-            </div>
-            <div class="form-group">
-              <label class="col-form-label">Email</label>
-              <input
-                  type="email"
-                  class="form-control"
-                  placeholder=" "
-                  name="Email"
-                  required=""
-              />
-            </div>
-            <div class="form-group">
-              <label class="col-form-label">Mật khẩu</label>
-              <input
-                  type="password"
-                  class="form-control"
-                  placeholder=" "
-                  name="Password"
-                  id="password1"
-                  required=""
-              />
-            </div>
-            <div class="form-group">
-              <label class="col-form-label">Nhập lại mật khẩu</label>
-              <input
-                  type="password"
-                  class="form-control"
-                  placeholder=" "
-                  name="Confirm Password"
-                  id="password2"
-                  required=""
-              />
-            </div>
-            <div class="right-w3l">
-              <input type="submit" class="form-control" value="Đăng ký"/>
-            </div>
-          </form>
+          <Register/>
         </div>
       </div>
     </div>
@@ -203,7 +157,7 @@
             <div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
               <div id="cart">
                 <span @click="showCart" class="p1 fa-stack fa-2x has-badge"
-                      :data-count="$store.state.home.cart.length"
+                      :data-count="$store.state.home.carts.length"
                       style="cursor: pointer">
                   <i class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse"></i>
                 </span>
@@ -224,10 +178,11 @@
 import Login from "@/components/Login";
 import {mapGetters} from "vuex";
 import {HOME_SEARCH, LOGOUT} from '@/store/actions.type';
+import Register from "@/components/Register";
 
 export default {
   name: "Header",
-  components: {Login},
+  components: {Register, Login},
   data() {
     return {
       search: this.$store.state.home.search
@@ -244,7 +199,7 @@ export default {
       this.$store.dispatch(HOME_SEARCH, this.search);
     },
     showCart() {
-      if (this.$store.state.home.cart.length > 0) {
+      if (this.$store.state.home.carts.length > 0) {
         this.$router.push({name: 'Cart'})
       }
     }
