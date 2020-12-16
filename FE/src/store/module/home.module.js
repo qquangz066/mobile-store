@@ -1,4 +1,4 @@
-import {ADD_TO_CART, CHECK_OUT, DELETE_FROM_CART, HOME_SEARCH, SET_CART_QUALITY} from "../actions.type";
+import {ADD_TO_CART, CHECK_OUT, DELETE_FROM_CART, HOME_SEARCH, SET_CART_QUANTITY} from "../actions.type";
 import {ADD_CART, DELETE_ALL_CART, DELETE_CART, SET_CART, SET_SEARCH} from "../mutations.type";
 import orderService from "@/services/order";
 
@@ -29,7 +29,7 @@ const actions = {
     async [ADD_TO_CART](context, cart) {
         context.commit(LOCAL_STORAGE_PLUGIN_CART + ADD_CART, cart);
     },
-    async [SET_CART_QUALITY](context, cart) {
+    async [SET_CART_QUANTITY](context, cart) {
         context.commit(LOCAL_STORAGE_PLUGIN_CART + SET_CART, cart);
     },
     async [DELETE_FROM_CART](context, cart) {
@@ -52,7 +52,7 @@ const mutations = {
         let addedProduct = state.carts.find(item => item.product._id === cart.product._id)
 
         if (addedProduct) {
-            addedProduct.quality += cart.quality
+            addedProduct.quantity += cart.quantity
         } else {
             state.carts.push(cart);
         }
@@ -61,7 +61,7 @@ const mutations = {
         let addedProduct = state.carts.find(item => item.product._id === cart.product._id)
 
         if (addedProduct) {
-            addedProduct.quality = cart.quality
+            addedProduct.quantity = cart.quantity
         } else {
             state.carts.push(cart);
         }

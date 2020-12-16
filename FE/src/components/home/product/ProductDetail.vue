@@ -26,8 +26,8 @@
         <div class="col-lg-6 single-right-left simpleCart_shelfItem">
           <h3 class="mb-3">{{ data.name }}</h3>
           <p class="mb-3">
-            <span class="item_price">{{ $money(data.price) }}</span>
-            <del class="mx-2 font-weight-light">{{ $money(data.old_price) }}</del>
+            <span class="item_price">{{ $money_format(data.price) }}</span>
+            <del class="mx-2 font-weight-light">{{ $money_format(data.old_price) }}</del>
           </p>
           <div class="single-infoagile">
             <ul>
@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     async addToCart(product) {
-      await this.$store.dispatch(ADD_TO_CART, {product, quality: 1})
+      await this.$store.dispatch(ADD_TO_CART, {product, quantity: 1})
       this.$toast.success("Added to cart", {timeout: 3000, position: POSITION.TOP_CENTER});
     },
     async getProduct() {

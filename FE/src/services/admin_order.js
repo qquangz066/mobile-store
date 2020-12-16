@@ -1,20 +1,20 @@
 import {$http} from "@/http";
-import store from '@/store';
+
 
 const orderService = {
     async list(params) {
         return await $http
-            .get('/orders', {params: {...params, email: store.state.auth.auth?.user.email}})
+            .get('/admin/orders', {params: params})
             .then(res => res.data);
     },
     async get(id) {
         return await $http
-            .get(`/orders/${id}`)
+            .get(`/admin/orders/${id}`)
             .then(res => res.data);
     },
-    async create(order) {
+    async patch(id, order) {
         return await $http
-            .post(`/orders`, {...order})
+            .patch(`/admin/orders/${id}`, {...order})
             .then(res => res.data);
     },
 };

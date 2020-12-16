@@ -118,8 +118,8 @@
                         <a href="single.html">{{ product.name }}</a>
                       </h4>
                       <div class="info-product-price my-2">
-                        <span class="item_price">{{ $money(product.price) }}</span>
-                        <del>{{ $money(product.old_price) }}</del>
+                        <span class="item_price">{{ $money_format(product.price) }}</span>
+                        <del>{{ $money_format(product.old_price) }}</del>
                       </div>
                       <div
                           class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out"
@@ -215,7 +215,7 @@ export default {
 
   methods: {
     async addToCart(product) {
-      await this.$store.dispatch(ADD_TO_CART, {product, quality: 1})
+      await this.$store.dispatch(ADD_TO_CART, {product, quantity: 1})
       this.$toast.success("Added to cart", {timeout: 3000, position: POSITION.TOP_CENTER});
     },
     async getProducts(params = {}) {

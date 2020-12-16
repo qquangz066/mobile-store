@@ -5,6 +5,8 @@ import ProductList from "@/components/home/product/ProductList";
 import store from '@/store';
 import Cart from "@/components/home/order/Cart";
 import {useToast} from "vue-toastification";
+import OrderList from "@/components/home/order/OrderList";
+import OrderDetail from "@/components/home/order/OrderDetail";
 
 const routes = [
     {
@@ -24,11 +26,22 @@ const routes = [
                 component: ProductDetail
             },
             {
-                path: '/cart',
+                path: 'cart',
                 name: 'Cart',
                 component: Cart,
                 meta: {requiresAuth: true},
-            }
+            },
+            {
+                path: 'orders',
+                name: 'OrderList',
+                component: OrderList,
+                meta: {requiresAuth: true},
+            },
+            {
+                path: 'orders/:id',
+                name: 'OrderDetail',
+                component: OrderDetail
+            },
         ]
     },
     {
@@ -83,6 +96,17 @@ const routes = [
                 path: 'users/:id',
                 name: 'AdminUserDetail',
                 component: () => import( '../components/admin/user/UserDetail.vue'),
+                meta: {requiresAuth: true, roles: ['admin']}
+            },
+            {
+                path: 'orders',
+                name: 'AdminOrderList',
+                component: () => import( '../components/admin/order/OrderList.vue'),
+                meta: {requiresAuth: true, roles: ['admin']}
+            }, {
+                path: 'orders/:id',
+                name: 'AdminOrderDetail',
+                component: () => import( '../components/admin/order/OrderDetail.vue'),
                 meta: {requiresAuth: true, roles: ['admin']}
             },
         ]

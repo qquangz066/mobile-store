@@ -31,6 +31,12 @@
                 <span class="nav-link-text">Users</span>
               </router-link>
             </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'AdminOrderList'}"
+                           :class="'nav-link ' + ($route.name==='AdminOrderList'? 'active' : '')">
+                <span class="nav-link-text">Orders</span>
+              </router-link>
+            </li>
           </ul>
 
         </div>

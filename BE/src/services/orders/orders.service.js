@@ -1,19 +1,27 @@
 // Initializes the `orders` service on path `/orders`
-const { Orders } = require('./orders.class');
+const {Orders} = require('./orders.class');
 const createModel = require('../../models/orders.model');
 const hooks = require('./orders.hooks');
 
-module.exports = function (app) {
-  const options = {
-    Model: createModel(app),
-    paginate: app.get('paginate')
-  };
+let ordersModel;
 
-  // Initialize our service with any options it requires
-  app.use('/orders', new Orders(options, app));
+module.exports = {
+  orders: function (app) {
+    ordersModel = createModel(app);
+    const options = {
+      Model: ordersModel,
+      paginate: app.get('paginate')
+    };
 
-  // Get our initialized service so that we can register hooks
-  const service = app.service('orders');
+    // Initialize our service with any options it requires
+    app.use('/orders', new Orders(options, app));
 
-  service.hooks(hooks);
+    // Get our initialized service so that we can register hooks
+    const service = app.service('orders');
+
+    service.hooks(hooks);
+  },
+  getOrdersModel: function () {
+    return ordersModel;
+  }
 };

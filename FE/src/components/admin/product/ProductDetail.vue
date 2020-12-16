@@ -101,11 +101,11 @@
             </p>
           </div>
           <div class="form-group">
-            <label class="form-control-label">Quality</label>
-            <input :class="[ 'form-control', errors.quality && 'is-invalid' ]" type="number"
-                   v-model.number="product.quality">
-            <p class="text-danger" v-if="errors.quality">
-              {{ errors.quality }}
+            <label class="form-control-label">Quantity</label>
+            <input :class="[ 'form-control', errors.quantity && 'is-invalid' ]" type="number"
+                   v-model.number="product.quantity">
+            <p class="text-danger" v-if="errors.quantity">
+              {{ errors.quantity }}
             </p>
           </div>
           <div class="form-group">
@@ -202,7 +202,7 @@ const schema = yup.object({
   gallery: yup.array(yup.string()).min(1),
   price: yup.number().min(0).required(),
   old_price: yup.number().min(0).required(),
-  quality: yup.number().min(0).required(),
+  quantity: yup.number().min(0).required(),
   status: yup.string().matches(/(enable|disable)/)
 });
 
@@ -225,7 +225,7 @@ export default {
         gallery: [],
         price: 0,
         old_price: 0,
-        quality: 0,
+        quantity: 0,
         status: 'enable',
       },
       brands: {},

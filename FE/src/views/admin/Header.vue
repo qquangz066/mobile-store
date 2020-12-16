@@ -38,23 +38,11 @@
               <div class="dropdown-header noti-title">
                 <h6 class="text-overflow m-0">Welcome!</h6>
               </div>
-              <a href="#!" class="dropdown-item">
-                <i class="ni ni-single-02"></i>
-                <span>My profile</span>
-              </a>
               <router-link :to="{ name: 'ProductList'}"
                            class="dropdown-item">
                 <i class="ni ni-single-02"></i>
                 <span class="ni ni-calendar-grid-58">Home page</span>
               </router-link>
-              <a href="#!" class="dropdown-item">
-                <i class="ni ni-single-02"></i>
-                <span>Activity</span>
-              </a>
-              <a href="#!" class="dropdown-item">
-                <i class="ni ni-single-02"></i>
-                <span>Support</span>
-              </a>
               <div class="dropdown-divider"></div>
               <button class="dropdown-item" @click="logout" style="cursor: pointer">
                 <i class="ni ni-user-run"></i>

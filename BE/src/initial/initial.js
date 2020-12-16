@@ -124,7 +124,7 @@ exports.initDB = async function (app) {
           gallery: [base64Encode('iphone-11-128-2.jpg'), base64Encode('iphone-11-128-3.jpg'), base64Encode('iphone-11-128-4.jpg')],
           price: 21990000,
           old_price: 0,
-          quality: 100,
+          quantity: 100,
         }
       );
 
@@ -175,7 +175,7 @@ exports.initDB = async function (app) {
           gallery: [],
           price: 40990000,
           old_price: 0,
-          quality: 100,
+          quantity: 100,
         }
       );
 
@@ -226,7 +226,7 @@ exports.initDB = async function (app) {
           gallery: [],
           price: 40990000,
           old_price: 0,
-          quality: 100,
+          quantity: 100,
         }
       );
 
@@ -284,7 +284,7 @@ exports.initDB = async function (app) {
           gallery: [],
           price: 21990000,
           old_price: 0,
-          quality: 100,
+          quantity: 100,
         }
       );
 
@@ -342,7 +342,7 @@ exports.initDB = async function (app) {
           gallery: [],
           price: 15990000,
           old_price: 16000000,
-          quality: 100,
+          quantity: 100,
         }
       );
 
@@ -400,7 +400,7 @@ exports.initDB = async function (app) {
           gallery: [],
           price: 3590000,
           old_price: 4590000,
-          quality: 100,
+          quantity: 100,
         }
       );
 
@@ -458,7 +458,7 @@ exports.initDB = async function (app) {
           gallery: [],
           price: 3590000,
           old_price: 4590000,
-          quality: 100,
+          quantity: 100,
         }
       );
       app.service('admin/products').create(
@@ -512,7 +512,7 @@ exports.initDB = async function (app) {
           gallery: [],
           price: 11990000,
           old_price: 12990000,
-          quality: 10,
+          quantity: 10,
         }
       );
 

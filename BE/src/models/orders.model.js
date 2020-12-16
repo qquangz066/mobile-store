@@ -11,20 +11,22 @@ module.exports = function (app) {
     name: {type: String, required: true},
     image: {type: String, required: true},
     price: {type: Number, required: true},
-    quality: {type: Number, required: true}
+    quantity: {type: Number, required: true}
   });
 
   const detailSchema = new Schema({
     product: productSchema,
-    quality: {type: Number, required: true}
+    quantity: {type: Number, required: true}
   });
 
   const schema = new Schema({
     name: {type: String, required: true},
+    email: {type: String, required: true},
     phone_number: {type: String, required: true},
     address: {type: String, required: true},
     total: {type: Number, required: true},
-    detail: [detailSchema]
+    detail: [detailSchema],
+    status: {type: String, default: 'pending'},
   }, {
     timestamps: true
   });

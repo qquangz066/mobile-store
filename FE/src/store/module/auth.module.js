@@ -13,7 +13,7 @@ const state = {...initialState};
 
 const actions = {
     async [REGISTER](context, user) {
-        const data = auth.register(user);
+        const data = await auth.register(user);
         if (data) {
             await context.dispatch(LOGIN, {email: user.email, password: user.password});
         }

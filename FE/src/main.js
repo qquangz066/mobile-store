@@ -12,7 +12,8 @@ const app = createApp(App);
 app.config.globalProperties.$http = $http;
 app.config.globalProperties.$axios = $axios;
 app.config.globalProperties.$services = services;
-app.config.globalProperties.$money = (money) => money?.toLocaleString() + 'đ';
+app.config.globalProperties.$money_format = (money) => money?.toLocaleString() + 'đ';
+app.config.globalProperties.$date_format = (date) => (new Date(date)).toLocaleString();
 app.config.globalProperties.$toast = useToast();
 
 app.use(store).use(router).use(Toast).mount('#app');

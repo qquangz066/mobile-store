@@ -16,7 +16,7 @@ module.exports = function (app) {
     gallery: {type: Array},
     price: {type: Number, required: true},
     old_price: {type: Number, required: true},
-    quality: {type: Number, required: true},
+    quantity: {type: Number, required: true},
     status: {type: String, default: 'enable'},
   }, {
     timestamps: true

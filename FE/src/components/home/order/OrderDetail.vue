@@ -5,8 +5,13 @@
       <section class="shopping-cart dark">
         <div class="container">
           <div class="content">
+            <div class="p-4">
+              <span>Status: </span>
+              <span class="btn btn-info">{{ data.status }}</span>
+            </div>
+
             <div class="items">
-              <div class="product" v-for="(item,index) in carts" :key="index">
+              <div class="product" v-for="(item,index) in data.detail" :key="index">
                 <div class="row">
                   <div class="col-2">
                     <img class="img-fluid mx-auto d-block image" :src="item.product.image">
@@ -20,19 +25,11 @@
                           </div>
                         </div>
                         <div class="col-3 quantity">
-                          <label>Quantity:</label>
-                          <input
-                              @input="$store.dispatch('SET_CART_QUANTITY',{...item,quantity:parseInt($event.target.value)})"
-                              type="number"
-                              :value="item.quantity" min="1" class="form-control quantity-input">
+                          <label>Quantity: </label>
+                          <span>{{ item.quantity }}</span>
                         </div>
                         <div class="col-3 price ">
                           <span>{{ $money_format(item.product.price) }}</span>
-                        </div>
-                        <div class="col-1 price">
-                          <button @click="$store.dispatch('DELETE_FROM_CART',item)" class="btn btn-danger"
-                                  style="cursor: pointer">delete
-                          </button>
                         </div>
                       </div>
                     </div>
@@ -40,63 +37,57 @@
                 </div>
               </div>
             </div>
-            <div v-if="carts.length>0" class="modal-body">
+            <div class="modal-body">
               <div class="form-group">
                 <label class="col-form-label">Name</label>
                 <input
-                    v-model="form.name"
-                    :class="[ 'form-control', errors.name && 'is-invalid' ]"
+                    readonly
+                    :value="data.name"
                     type="text"
+                    class="form-control"
                 />
-                <p class="text-danger" v-if="errors.name">
-                  {{ errors.name }}
-                </p>
               </div>
               <div class="form-group">
                 <label class="col-form-label">Email</label>
                 <input
-                    v-model="form.email"
-                    :class="[ 'form-control', errors.email && 'is-invalid' ]"
+                    readonly
+                    :value="data.email"
                     type="text"
+                    class="form-control"
                 />
-                <p class="text-danger" v-if="errors.email">
-                  {{ errors.email }}
-                </p>
               </div>
               <div class="form-group">
                 <label class="col-form-label">Phone</label>
                 <input
-                    v-model="form.phone_number"
-                    :class="[ 'form-control', errors.phone_number && 'is-invalid' ]"
+                    readonly
+                    :value="data.phone_number"
                     type="email"
+                    class="form-control"
                 />
-                <p class="text-danger" v-if="errors.phone_number">
-                  {{ errors.phone_number }}
-                </p>
+
               </div>
               <div class="form-group">
                 <label class="col-form-label">Address</label>
                 <input
-                    v-model="form.address"
-                    :class="[ 'form-control', errors.address && 'is-invalid' ]"
-                    type="password"
+                    readonly
+                    :value="data.address"
+                    class="form-control"
                 />
-                <p class="text-danger" v-if="errors.address">
-                  {{ errors.address }}
-                </p>
+
               </div>
               <div class="summary">
                 <h3>Summary</h3>
                 <div class="summary-item"><span class="text">Discount</span><span class="price">0đ</span></div>
                 <div class="summary-item"><span class="text">Shipping</span><span class="price">0đ</span></div>
                 <div class="summary-item"><span class="text">Total</span><span class="price">{{
-                    $money_format(total)
+                    $money_format(data.total)
                   }}</span>
                 </div>
-                <button @click="checkOut" type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
               </div>
             </div>
-
+            <div class="text-right p-2">
+            <button @click="$router.push({name: 'OrderList'})" type="button" class="btn btn-danger">Back</button>
+            </div>
           </div>
         </div>
       </section>
@@ -106,61 +97,30 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
-import {CHECK_OUT} from "@/store/actions.type";
-import * as yup from "yup";
 import OrderLayout from "@/views/home/OrderLayout";
 
-const schema = yup.object({
-  name: yup.string().required(),
-  email: yup.string().required(),
-  phone_number: yup.string().required(),
-  address: yup.string().required()
-});
-
 export default {
-  name: "Cart",
+  name: "OrderDetail",
   components: {OrderLayout},
   data() {
     return {
-      errors: {},
-      form: {
-        name: this.$store.state.auth?.auth?.user?.name,
-        email: this.$store.state.auth?.auth?.user?.email,
-        phone_number: this.$store.state.auth?.auth?.user?.phone_number,
-        address: '',
-      }
+      data: {}
     }
   },
-  computed: {
-    total() {
-      return this.carts
-          .map(item => item.product.price * item.quantity)
-          .reduce((prev, curr) => prev + curr, 0)
-    },
-    ...mapState({
-      carts: state => state.home.carts,
-    })
-  },
+  computed: {},
   methods: {
-    checkOut() {
-      schema.validate({...this.form}, {abortEarly: false})
-          .then(async () => {
-            this.errors = {};
-            const result = await this.$store.dispatch(CHECK_OUT, {...this.form, total: this.total, detail: this.carts})
-            if (result) {
-              await this.$router.push({name: 'OrderList'});
-              this.$toast('Oder successfully. We will contact you soon!')
-            }
-          })
-          .catch(err => {
-            err?.inner?.forEach(error => {
-              this.errors[error.path] = error.message;
-            });
-          });
-
-    }
-  }
+    async getOrder() {
+      this.data = await this.$services.order.get(this.$route.params.id).catch(
+          err => {
+            console.log(err)
+            this.$router.go(-1);
+          }
+      );
+    },
+  },
+  created() {
+    this.getOrder();
+  },
 }
 </script>
 

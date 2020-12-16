@@ -16,15 +16,13 @@
                 </span>
               </a>
               <div class="dropdown-menu  dropdown-menu-left ">
-                <a href="#!" class="dropdown-item">
+                <router-link :to="{ name: 'OrderList'}"
+                             class="dropdown-item">
                   <i class="ni ni-single-02"></i>
-                  <span>My profile</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
-                </a>
+                  <span class="ni ni-calendar-grid-58">Orders</span>
+                </router-link>
                 <router-link :to="{ name: 'AdminProductList'}"
+                             v-if="auth.user.role==='admin'"
                              class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span class="ni ni-calendar-grid-58">Admin page</span>
